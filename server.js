@@ -1,5 +1,5 @@
-var express = require("express");
-var bodyParser = require("body-parser");
+import express from "express";
+import { urlencoded, json } from "body-parser";
 
 var app = express();
 
@@ -7,7 +7,15 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 
 // Sets up the Express app to handle data parsing
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(urlencoded({ extended: true }));
+app.use(json());
 
-// look at how i did friend finder on my repo and use that and eventually we will improve. 
+//Router
+//set it up like this later
+// require("./app/routing/apiRoutes")(app);
+// require("./app/routing/htmlRoutes")(app);
+
+// Listner 
+app.listen(PORT, function() {
+    console.log("App listening on PORT: " + PORT);
+  });
