@@ -7,8 +7,26 @@ function aJax(URL, METHOD, CALLBACK){
 	}).done(CALLBACK);
 }
 
-//when button click console log something. 
+//return a bool if kanji exists in text. 
+function doesKanjiExist(ch){
+	return (ch >= "\u4e00" && ch <= "\u9faf") || (ch >= "\u3400" && ch <= "\u4dbf") || ch === "𠮟";
+}
 
+function buttonClick(){
+	event.preventDefault();
+	var kaniInput = $("#kanjiInput").val().trim();
+	//run function and pass text into it. 
+	if(doesKanjiExist(kaniInput)){
+		console.log("there is kanji");
+	}
+	else{
+		console.log("there is no kanji.")
+	}
+	
+}
+
+//button click handler. 
+$(document).on("click", "#submit-kanji-button", buttonClick);
 
 // TODO -- 
 // 1. funtion to return true  or false if kanji exists in text. 

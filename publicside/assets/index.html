@@ -5,16 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>KanjiApp</title>
-    <script src="../assets/frontjs.js"></script>        
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="frontjs.js"></script>
 </head>
 <body>
     <!--this the form to inout kanji-->
     <form id="kanjiInput-Form">
         <label> Please enter Japanese Text.</label>
         <br>
-        <textarea class="kanjiInput"></textarea>
+        <textarea id="kanjiInput"></textarea>
         <input id ="submit-kanji-button" type="submit"></input>
     </form>  
     <!--Dump the kanji definitions and stuff here-->  
