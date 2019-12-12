@@ -12,10 +12,12 @@ app.use(json());
 
 //Router
 //set it up like this later
-// require("./app/routing/apiRoutes")(app);
+var routes = require("./routing/waniAPI")(app);
 // require("./app/routing/htmlRoutes")(app);
 
 // Listner 
+app.use("/", routes);
+
 app.listen(PORT, function() {
     console.log("App listening on PORT: " + PORT);
   });

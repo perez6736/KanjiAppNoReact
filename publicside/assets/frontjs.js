@@ -8,6 +8,7 @@ function aJax(URL, METHOD, CALLBACK){
 }
 
 //return a bool if kanji exists in text. 
+// TODO: has bugs with "/n" and if kanji is not first character
 function doesKanjiExist(ch){
 	return (ch >= "\u4e00" && ch <= "\u9faf") || (ch >= "\u3400" && ch <= "\u4dbf") || ch === "𠮟";
 }
