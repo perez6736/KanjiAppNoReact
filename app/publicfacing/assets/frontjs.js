@@ -1,5 +1,3 @@
-
-//creating a ajax method so i can only call this once
 function aJax(URL, METHOD, CALLBACK){ 
 	$.ajax({
 		url: URL,

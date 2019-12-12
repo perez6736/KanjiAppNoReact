@@ -1,5 +1,5 @@
-import express from "express";
-import { urlencoded, json } from "body-parser";
+var express = require('express');
+var bodyParser = require("body-parser");
 
 var app = express();
 
@@ -7,17 +7,16 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 
 // Sets up the Express app to handle data parsing
-app.use(urlencoded({ extended: true }));
-app.use(json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 //Router
-//set it up like this later
-var routes = require("./routing/waniAPI")(app);
-// require("./app/routing/htmlRoutes")(app);
+//require("./app/routing/waniAPI")(app);
+require("./app/routing/htmlRoute")(app);
 
 // Listner 
-app.use("/", routes);
 
 app.listen(PORT, function() {
     console.log("App listening on PORT: " + PORT);
+    console.log(__dirname + '/app/publicfacing/assets/front.js')
   });
