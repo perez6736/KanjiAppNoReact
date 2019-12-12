@@ -27,7 +27,7 @@ function buttonClick(){
 	
 }
 
-// creates obj of counted kanji 
+// accumalator for reduce function. 
 function tallupelements(obj, word){
 	if(!obj[word]){
 		obj[word] = 0; 
@@ -40,10 +40,10 @@ function tallupelements(obj, word){
 function countKanji(input){
 	// turn string to array so we can get ready to count. 
 	var inputArray = input.split("");
-	var kanjiCount = {}; 
 	//count dups in array 
-	var count = inputArray.reduce(tallupelements, kanjiCount);
+	var count = inputArray.reduce(tallupelements, {});
 	console.log(count); 
+
 }
 
 //button click handler. 
