@@ -1,3 +1,5 @@
+console.log("js file");
+
 function aJax(URL, METHOD, CALLBACK){ 
 	$.ajax({
 		url: URL,
@@ -14,20 +16,27 @@ function doesKanjiExist(ch){
 function buttonClick(){
 	event.preventDefault();
 	var kanjiInput = $("#kanjiInput").val().trim();
-	//run function and pass text into it. 
-	if(doesKanjiExist(kanjiInput)){
-		//count the kanji in and order by most frequent 
-		console.log("there is kanji");
-		countKanji(kanjiInput);
+	var kanjiInputArr = kanjiInput.split("");
+	var kanjiOnlyArr = []; 
+
+	// loop through input 
+	// and if atleast one character is kanji 
+	// we will start the count kanji function and end loop 
+	for(i=0; i<kanjiInputArr.length; i++){
+		if(doesKanjiExist(kanjiInputArr[i])){ 
+			console.log("there is kanji");
+			kanjiOnlyArr.push(kanjiInputArr[i]);
+		}
+		else{
+			console.log("there is no kanji.");
+		}
 	}
-	else{
-		console.log("there is no kanji.");
-	}
-	
+	// need to handle if there is no input.. 
+	countKanji(kanjiOnlyArr);
 }
 
 // accumalator for reduce function. 
-function tallupelements(obj, word){
+function tallyupelements(obj, word){
 	if(!obj[word]){
 		obj[word] = 0; 
 	}
@@ -36,23 +45,19 @@ function tallupelements(obj, word){
 }
 
 // return object of counted kanjis 
+// function accepts only arrays! 
 function countKanji(input){
-	// turn string to array so we can get ready to count. 
-	var inputArray = input.split("");
 	//count dups in array 
-	var count = inputArray.reduce(tallupelements, {});
+	var count = inputArray.reduce(tallyupelements, {});
 	console.log(count); 
-
 }
+
+
 
 //button click handler. 
 $(document).on("click", "#submit-kanji-button", buttonClick);
 
 // TODO -- 
-// 1. funtion to return true  or false if kanji exists in text. - done
-// 1a. attach event handler to button  - done 
-// 1b. write funtion for button - start with console log - done 
-// 1c. find out why this didnt show up on github - done 
 
 // 2. loop through list and create list of kanji -- make sure to add duplicate - done 
 // 2a. loop through new list and order by most frequent kanji 
@@ -64,7 +69,5 @@ $(document).on("click", "#submit-kanji-button", buttonClick);
 // 3b. See how wanikani sends response 
 
 // 4. Setup local server 
-// 4a. Set server to display index.html 
+// 4a. Set server to display index.html - done 
 // 4b. should api call be done client side or server side... is this a stupid question? 
-// 4c. what responsiblites should the server have besides routing? look this up. 
-// 4d. this is fun

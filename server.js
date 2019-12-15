@@ -10,6 +10,9 @@ var PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// need this to use the js file and css file for the html pages. 
+app.use(express.static(__dirname + '/app/publicfacing'));
+
 //Router
 //require("./app/routing/waniAPI")(app);
 require("./app/routing/htmlRoute")(app);
@@ -18,5 +21,4 @@ require("./app/routing/htmlRoute")(app);
 
 app.listen(PORT, function() {
     console.log("App listening on PORT: " + PORT);
-    console.log(__dirname + '/app/publicfacing/assets/front.js')
   });
