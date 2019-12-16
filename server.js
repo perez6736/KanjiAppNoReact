@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/app/publicfacing'));
 
 //Router
-//require("./app/routing/waniAPI")(app);
+require("./app/routing/waniAPI")(app);
 require("./app/routing/htmlRoute")(app);
 
 // Listner 
