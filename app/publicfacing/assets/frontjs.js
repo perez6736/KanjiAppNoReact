@@ -49,7 +49,8 @@ function tallyupelements(obj, word){
 function countKanji(inputArray){
 	//count dups in array 
 	var count = inputArray.reduce(tallyupelements, {});
-	console.log(count); 
+
+	return count; // im dumb  
 }
 
 function buttonClick(){
