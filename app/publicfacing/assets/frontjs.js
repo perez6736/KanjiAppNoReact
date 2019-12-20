@@ -59,13 +59,9 @@ function buttonClick(){
 	var kanjiInput = $("#kanjiInput").val().trim(); // trimed input from form. 
 	var kanjiOnlyArr = createKanjiArr(kanjiInput); //array of kanjis only 
 	var countedKanjiObj = countKanji(kanjiOnlyArr); //object of kanji counted up 
-
-	$.post("/api/routes", countedKanjiObj, function(data){
-		// there is a problem where the object is still empty before it is posted to server. 
-		// maybe call the post inside the countKanji function?? 
-		console.log(countedKanjiObj);
+	console.log(kanjiInput)
+	$.get("/api/kanji", {kanji: kanjiInput}, function(data){
 		console.log(data);
-		console.log("you posted to the server!");
 	});
 }
 
