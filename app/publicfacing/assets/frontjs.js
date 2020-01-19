@@ -14,19 +14,13 @@ function doesKanjiExist(ch){
 // takes an input of text and spits out an array of kanji
 // if no kanji exits then it returns empty array. 
 function createKanjiArr(input){
-	var inputArr = input.split("");
-	var kanjiOnlyArr = []; 
-
+	let inputArr = input.split("");
+	let kanjiOnlyArr = []; 
 	for(i=0; i<inputArr.length; i++){
 		if(doesKanjiExist(inputArr[i])){ 
-			console.log("found a kanji");
 			kanjiOnlyArr.push(inputArr[i]);
 		}
-		else{
-			console.log("there is no kanji.");
-		}
 	}
-	console.log(kanjiOnlyArr);
 	return kanjiOnlyArr;
 }
 
@@ -43,31 +37,28 @@ function tallyupelements(obj, word){
 // function accepts only arrays! 
 function countKanji(inputArray){
 	//count dups in array 
-	var count = inputArray.reduce(tallyupelements, {});
-
+	let count = inputArray.reduce(tallyupelements, {});
 	return count; 
 }
 
+// this will make an array of kanji 
+function sendKanjiArray(){
+	let kanjiInput = $("#kanjiInput").val().trim(); // trimed input from form. 
+	let kanjiOnlyArr = createKanjiArr(kanjiInput); //array of kanjis only 
+	let countedKanjiObj = countKanji(kanjiOnlyArr); //object of kanji counted up 
+	let arrayOfKanjiInfo = []; 
+	// send an array of kanji 
+	$.get("/api/kanji", {kanji: kanjiOnlyArr}, function(data){
+		arrayOfKanjiInfo.push(data);
+		console.log(data);
+	})
+
+}
+
+// lets keep this simple with just functions. 
 function buttonClick(){
 	event.preventDefault();
-	// need to send an object most likely 
-	var kanjiInput = $("#kanjiInput").val().trim(); // trimed input from form. 
-	var kanjiOnlyArr = createKanjiArr(kanjiInput); //array of kanjis only 
-	var countedKanjiObj = countKanji(kanjiOnlyArr); //object of kanji counted up 
-	var arrayOfKanjiInfo = []; 
-	console.log(kanjiInput)
-	// send an array of kanji 
-
-	// i dont like this because i have to send multiple requests to the server 
-	// and then send more request to server to api 
-	// i want to be able to send one request to server then the server does it. 
-	for(i=0; i<kanjiOnlyArr.length; i++ ){
-		$.get("/api/kanji", {kanji: kanjiOnlyArr[i]}, function(data){
-			arrayOfKanjiInfo.push(data);
-			console.log(data);
-		});	
-	}
-	console.log(arrayOfKanjiInfo);
+	sendKanjiArray();
 }
 
 

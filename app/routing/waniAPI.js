@@ -12,17 +12,26 @@ var key = WKkeys.apiKeys.waniKani;
 // stuff for routes - backend <==> frontend
 // =====================================================
 module.exports = function(app) {
+    //anyhting related to frontend and back end comms goes in here. 
+
     // revieces an array of kanji 
     app.get("/api/kanji", function(req, res){
         // function gets kanji and sends back results to UI
-        let encodedKanjiParam = encodeURIComponent(req.query.kanji);
+        let KanjiParam = req.query.kanji;
         console.log(req.query.kanji)
         // pass kanjiparam to 3rd party API and respond with data. 
-        getKanji({url: 'https://kanjiapi.dev/v1/kanji/' + encodedKanjiParam, method: 'GET'}, function(body){
-            res.json(body);
-        });
+        // this worked!! 
+        const promise = KanjiParam.map(word => new Promise (resolve => {
+            getKanji({url: 'https://kanjiapi.dev/v1/kanji/' + encodeURIComponent(word)}, function(body){
+                resolve(body);
+            })
+        }))
+        Promise.all(promise).then(results => {
+            res.json(results);
+        })
     });
 }
+
 
 //new kanji api 
 function getKanji(url, callback){
@@ -39,7 +48,6 @@ function getKanji(url, callback){
     });
 }
 
-// in the future 
 
 
 
