@@ -12,22 +12,17 @@ var key = WKkeys.apiKeys.waniKani;
 // stuff for routes - backend <==> frontend
 // =====================================================
 module.exports = function(app) {
+    // revieces an array of kanji 
     app.get("/api/kanji", function(req, res){
-        // idk what im doing - 
         // function gets kanji and sends back results to UI
         let encodedKanjiParam = encodeURIComponent(req.query.kanji);
+        console.log(req.query.kanji)
         // pass kanjiparam to 3rd party API and respond with data. 
         getKanji({url: 'https://kanjiapi.dev/v1/kanji/' + encodedKanjiParam, method: 'GET'}, function(body){
             res.json(body);
         });
     });
 }
-// new API 
-// I have to encode the kanji for URLs 
-// const getKanjiInfo = {
-//     url: 'https://kanjiapi.dev/v1/kanji/' + param,
-//     method: 'GET'
-// };
 
 //new kanji api 
 function getKanji(url, callback){
@@ -44,7 +39,7 @@ function getKanji(url, callback){
     });
 }
 
-
+// in the future 
 
 
 
@@ -64,13 +59,13 @@ function getKanji(url, callback){
 // =====================================================
 // stuff for wani kani api 
 // =====================================================
-const getKanjiType_WK = {
-    url: 'https://api.wanikani.com/v2/subjects?type=kanji',
-    method: 'GET',
-    headers: {
-        Authorization: 'Bearer ' + key
-    }
-};
+// const getKanjiType_WK = {
+//     url: 'https://api.wanikani.com/v2/subjects?type=kanji',
+//     method: 'GET',
+//     headers: {
+//         Authorization: 'Bearer ' + key
+//     }
+// };
 
 // function getKanji(callback){
 //     request(getKanjiType_WK, function(error, response, body) {

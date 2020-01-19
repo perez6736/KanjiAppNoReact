@@ -7,7 +7,6 @@
 // }
 
 //return a bool if kanji exists in text. 
-// TODO: has bugs with "/n" and if kanji is not first character
 function doesKanjiExist(ch){
 	return (ch >= "\u4e00" && ch <= "\u9faf") || (ch >= "\u3400" && ch <= "\u4dbf") || ch === "𠮟";
 }
@@ -18,9 +17,6 @@ function createKanjiArr(input){
 	var inputArr = input.split("");
 	var kanjiOnlyArr = []; 
 
-	// loop through input 
-	// and if atleast one character is kanji 
-	// we will start the count kanji function and end loop 
 	for(i=0; i<inputArr.length; i++){
 		if(doesKanjiExist(inputArr[i])){ 
 			console.log("found a kanji");
@@ -30,7 +26,6 @@ function createKanjiArr(input){
 			console.log("there is no kanji.");
 		}
 	}
-	console.log(".. kanjiOnlyArr method .. ");
 	console.log(kanjiOnlyArr);
 	return kanjiOnlyArr;
 }
@@ -50,7 +45,7 @@ function countKanji(inputArray){
 	//count dups in array 
 	var count = inputArray.reduce(tallyupelements, {});
 
-	return count; // im dumb  
+	return count; 
 }
 
 function buttonClick(){
@@ -59,10 +54,20 @@ function buttonClick(){
 	var kanjiInput = $("#kanjiInput").val().trim(); // trimed input from form. 
 	var kanjiOnlyArr = createKanjiArr(kanjiInput); //array of kanjis only 
 	var countedKanjiObj = countKanji(kanjiOnlyArr); //object of kanji counted up 
+	var arrayOfKanjiInfo = []; 
 	console.log(kanjiInput)
-	$.get("/api/kanji", {kanji: kanjiInput}, function(data){
-		console.log(data);
-	});
+	// send an array of kanji 
+
+	// i dont like this because i have to send multiple requests to the server 
+	// and then send more request to server to api 
+	// i want to be able to send one request to server then the server does it. 
+	for(i=0; i<kanjiOnlyArr.length; i++ ){
+		$.get("/api/kanji", {kanji: kanjiOnlyArr[i]}, function(data){
+			arrayOfKanjiInfo.push(data);
+			console.log(data);
+		});	
+	}
+	console.log(arrayOfKanjiInfo);
 }
 
 
