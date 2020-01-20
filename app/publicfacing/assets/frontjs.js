@@ -52,6 +52,15 @@ function sendKanjiArray(){
 		arrayOfKanjiInfo.push(data);
 		console.log(data);
 	})
+	// put kanji in <ol> id = "kanjiInfo" 
+	// where to put this? 
+	for (i=0; i<arrayOfKanjiInfo.length; i++){
+		console.log("adfjsgsfg")
+		let li = $("<li>");
+		li.addClass("kanji");
+		li.text(arrayOfKanjiInfo[i]);
+		$("#kanjiInfo").append(li);
+	}
 
 }
 
