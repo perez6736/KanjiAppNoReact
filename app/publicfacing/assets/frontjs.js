@@ -62,6 +62,7 @@ function createKanjiList(arr){
 		let divEN = $("<div>");
 
 		// array of strings... need to fix this. 
+		// json.parse will fix
 		li.text("Kanji: " + arr[i].kanji);
 		divJLPT.text("JLPT N:" + arr[i].jlpt);
 		divEN.text("JLPT N:" + arr[i].jlpt);
