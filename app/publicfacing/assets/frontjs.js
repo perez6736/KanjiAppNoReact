@@ -50,26 +50,24 @@ function sendKanjiArray(){
 	// send an array of kanji 
 	$.get("/api/kanji", {kanji: kanjiOnlyArr}, function(data){
 		arrayOfKanjiInfo = data;
-		console.log(arrayOfKanjiInfo);
 		createKanjiList(arrayOfKanjiInfo);
 	})
 }
 
 function createKanjiList(arr){
 	for (i=0; i<arr.length; i++){
+		arr[i] = JSON.parse(arr[i]);
+		console.log(arr[i])
 		let li = $("<li>");
 		let divJLPT = $("<div>");
 		let divEN = $("<div>");
 
-		// array of strings... need to fix this. 
-		// json.parse will fix
-		li.text("Kanji: " + arr[i].kanji);
-		divJLPT.text("JLPT N:" + arr[i].jlpt);
-		divEN.text("JLPT N:" + arr[i].jlpt);
-
-		$(".kanjiInfo").append(divJLPT);
-		$(".kanjiInfo").append(divEN);
+		li.attr('id', 'kanji' + i);
+		divEN.text("Kanji: " + arr[i].kanji);
+		divJLPT.text("JLPT N" + arr[i].jlpt);
 		$("#kanjiInfo").append(li);
+		$("#kanji" + i).append(divEN);
+		$("#kanji" + i).append(divJLPT);
 	}
 }
 
@@ -78,8 +76,6 @@ function buttonClick(){
 	event.preventDefault();
 	sendKanjiArray();
 }
-
-
 
 
 //button click handler. 
