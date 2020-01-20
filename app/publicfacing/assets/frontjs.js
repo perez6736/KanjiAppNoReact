@@ -46,22 +46,26 @@ function sendKanjiArray(){
 	let kanjiInput = $("#kanjiInput").val().trim(); // trimed input from form. 
 	let kanjiOnlyArr = createKanjiArr(kanjiInput); //array of kanjis only 
 	let countedKanjiObj = countKanji(kanjiOnlyArr); //object of kanji counted up 
-	let arrayOfKanjiInfo = []; 
+	let arrayOfKanjiInfo; 
 	// send an array of kanji 
 	$.get("/api/kanji", {kanji: kanjiOnlyArr}, function(data){
-		arrayOfKanjiInfo.push(data);
-		console.log(data);
+		arrayOfKanjiInfo = data
+		console.log(arrayOfKanjiInfo);
+		createKanjiList(arrayOfKanjiInfo);
 	})
+}
+
+function createKanjiList(arr){
 	// put kanji in <ol> id = "kanjiInfo" 
 	// where to put this? 
-	for (i=0; i<arrayOfKanjiInfo.length; i++){
+	console.log(arr)
+	for (i=0; i<arr.length; i++){
 		console.log("adfjsgsfg")
 		let li = $("<li>");
 		li.addClass("kanji");
-		li.text(arrayOfKanjiInfo[i]);
+		li.text(arr[i]);
 		$("#kanjiInfo").append(li);
 	}
-
 }
 
 // lets keep this simple with just functions. 

@@ -27,6 +27,7 @@ module.exports = function(app) {
             })
         }))
         Promise.all(promise).then(results => {
+            console.log(results);
             res.json(results);
         })
     });
@@ -37,7 +38,6 @@ module.exports = function(app) {
 function getKanji(url, callback){
     request(url, function(error, response, body) {
         if (!error) {
-            console.log(body)
             callback(body); //send response through call back
         }
         else{
