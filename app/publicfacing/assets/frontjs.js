@@ -49,21 +49,25 @@ function sendKanjiArray(){
 	let arrayOfKanjiInfo; 
 	// send an array of kanji 
 	$.get("/api/kanji", {kanji: kanjiOnlyArr}, function(data){
-		arrayOfKanjiInfo = data
+		arrayOfKanjiInfo = data;
 		console.log(arrayOfKanjiInfo);
 		createKanjiList(arrayOfKanjiInfo);
 	})
 }
 
 function createKanjiList(arr){
-	// put kanji in <ol> id = "kanjiInfo" 
-	// where to put this? 
-	console.log(arr)
 	for (i=0; i<arr.length; i++){
-		console.log("adfjsgsfg")
 		let li = $("<li>");
-		li.addClass("kanji");
-		li.text(arr[i]);
+		let divJLPT = $("<div>");
+		let divEN = $("<div>");
+
+		// array of strings... need to fix this. 
+		li.text("Kanji: " + arr[i].kanji);
+		divJLPT.text("JLPT N:" + arr[i].jlpt);
+		divEN.text("JLPT N:" + arr[i].jlpt);
+
+		$(".kanjiInfo").append(divJLPT);
+		$(".kanjiInfo").append(divEN);
 		$("#kanjiInfo").append(li);
 	}
 }

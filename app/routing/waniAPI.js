@@ -16,18 +16,16 @@ module.exports = function(app) {
 
     // revieces an array of kanji 
     app.get("/api/kanji", function(req, res){
-        // function gets kanji and sends back results to UI
         let KanjiParam = req.query.kanji;
         console.log(req.query.kanji)
-        // pass kanjiparam to 3rd party API and respond with data. 
-        // this worked!! 
+
         const promise = KanjiParam.map(word => new Promise (resolve => {
             getKanji({url: 'https://kanjiapi.dev/v1/kanji/' + encodeURIComponent(word)}, function(body){
+                // body is a string that looks like object :(
                 resolve(body);
             })
         }))
         Promise.all(promise).then(results => {
-            console.log(results);
             res.json(results);
         })
     });
