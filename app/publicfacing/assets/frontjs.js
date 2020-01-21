@@ -41,6 +41,11 @@ function countKanji(inputArray){
 	return count; 
 }
 
+function removeDuplicatesFromArray(arr){
+	return arr.reduce((unique, item)=>
+	unique.includes(item) ? unique : [...unique, item], [])
+}
+
 // this will make an array of kanji 
 function sendKanjiArray(){
 	let kanjiInput = $("#kanjiInput").val().trim(); // trimed input from form. 
@@ -49,23 +54,27 @@ function sendKanjiArray(){
 	let arrayOfKanjiInfo; 
 	// send an array of kanji 
 	$.get("/api/kanji", {kanji: kanjiOnlyArr}, function(data){
-		arrayOfKanjiInfo = data;
+		arrayOfKanjiInfo = removeDuplicatesFromArray(data);
 		createKanjiList(arrayOfKanjiInfo);
 	})
 }
 
 function createKanjiList(arr){
+	$("#kanjiInfo").empty();
 	for (i=0; i<arr.length; i++){
 		arr[i] = JSON.parse(arr[i]);
 		console.log(arr[i])
 		let li = $("<li>");
+		let divKanji = $("<div>");
 		let divJLPT = $("<div>");
 		let divEN = $("<div>");
 
 		li.attr('id', 'kanji' + i);
-		divEN.text("Kanji: " + arr[i].kanji);
+		divKanji.text("Egnlish: " + arr[i].kanji);
+		divEN.text("Egnlish: " + arr[i].heisig_en);
 		divJLPT.text("JLPT N" + arr[i].jlpt);
 		$("#kanjiInfo").append(li);
+		$("#kanji" + i).append(divKanji);
 		$("#kanji" + i).append(divEN);
 		$("#kanji" + i).append(divJLPT);
 	}
@@ -76,7 +85,6 @@ function buttonClick(){
 	event.preventDefault();
 	sendKanjiArray();
 }
-
 
 //button click handler. 
 $(document).on("click", "#submit-kanji-button", buttonClick);
