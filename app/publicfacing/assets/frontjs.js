@@ -52,6 +52,7 @@ function sendKanjiArray(){
 	let kanjiOnlyArr = createKanjiArr(kanjiInput); //array of kanjis only 
 	let countedKanjiObj = countKanji(kanjiOnlyArr); //object of kanji counted up 
 	let arrayOfKanjiInfo; 
+	console.log(countedKanjiObj); // i have the count right here. 
 	// send an array of kanji 
 	$.get("/api/kanji", {kanji: kanjiOnlyArr}, function(data){
 		arrayOfKanjiInfo = removeDuplicatesFromArray(data);
@@ -63,7 +64,6 @@ function createKanjiList(arr){
 	$("#kanjiInfo").empty();
 	for (i=0; i<arr.length; i++){
 		arr[i] = JSON.parse(arr[i]);
-		console.log(arr[i])
 		let li = $("<li>");
 		let divKanji = $("<div>");
 		let divJLPT = $("<div>");
