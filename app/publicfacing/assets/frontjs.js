@@ -41,25 +41,29 @@ function countKanji(inputArray){
 	return count; 
 }
 
+// removes dups from an array 
 function removeDuplicatesFromArray(arr){
 	return arr.reduce((unique, item)=>
 	unique.includes(item) ? unique : [...unique, item], [])
 }
 
-// this will make an array of kanji 
-function sendKanjiArray(){
-	let kanjiInput = $("#kanjiInput").val().trim(); // trimed input from form. 
-	let kanjiOnlyArr = createKanjiArr(kanjiInput); //array of kanjis only 
-	let countedKanjiObj = countKanji(kanjiOnlyArr); //object of kanji counted up 
-	let arrayOfKanjiInfo; 
-	console.log(countedKanjiObj); // i have the count right here. 
+// this makes an arr of kanji from the input text box 
+function makeArrofKanjiFromInput (){
+	let Input = $("#kanjiInput").val().trim(); // trimed input from form. 
+	Input = createKanjiArr(Input); //array of kanjis only 
+
+	return Input;
+}
+
+// this send an array of kanji to the server. 
+function sendKanjiArray(arr){
 	// send an array of kanji 
-	$.get("/api/kanji", {kanji: kanjiOnlyArr}, function(data){
-		arrayOfKanjiInfo = removeDuplicatesFromArray(data);
-		createKanjiList(arrayOfKanjiInfo);
+	$.get("/api/kanji", {kanji: arr}, function(data){
+		createKanjiList(data);
 	})
 }
 
+// is it possible to make this cleaner? idk 
 function createKanjiList(arr){
 	$("#kanjiInfo").empty();
 	for (i=0; i<arr.length; i++){
@@ -80,26 +84,15 @@ function createKanjiList(arr){
 	}
 }
 
+
+
 // lets keep this simple with just functions. 
 function buttonClick(){
 	event.preventDefault();
-	sendKanjiArray();
+	let Kanjiarr = makeArrofKanjiFromInput();
+	Kanjiarr = removeDuplicatesFromArray(Kanjiarr)
+	sendKanjiArray(Kanjiarr);
 }
 
 //button click handler. 
 $(document).on("click", "#submit-kanji-button", buttonClick);
-
-// TODO -- 
-
-// 2. loop through list and create list of kanji -- make sure to add duplicate - done 
-// 2a. loop through new list and order by most frequent kanji 
-// 2b. gather count of occurence of kanji - done 
-// 2c. research how to prepare data to send to wani kani api 
-
-// 3. Look API from wanki kani and see if i can make calls. 
-// 3a. Make call to wani kani 
-// 3b. See how wanikani sends response 
-
-// 4. Setup local server 
-// 4a. Set server to display index.html - done 
-// 4b. should api call be done client side or server side... is this a stupid question? 
