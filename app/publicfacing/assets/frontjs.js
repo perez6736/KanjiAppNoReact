@@ -6,6 +6,8 @@
 // 	}).done(CALLBACK);
 // }
 
+var userInput;
+
 //return a bool if kanji exists in text. 
 function doesKanjiExist(ch){
 	return (ch >= "\u4e00" && ch <= "\u9faf") || (ch >= "\u3400" && ch <= "\u4dbf") || ch === "𠮟";
@@ -49,9 +51,8 @@ function removeDuplicatesFromArray(arr){
 
 // this makes an arr of kanji from the input text box 
 function makeArrofKanjiFromInput (){
-	let Input = $("#kanjiInput").val().trim(); // trimed input from form. 
+	let Input = userInput  
 	Input = createKanjiArr(Input); //array of kanjis only 
-
 	return Input;
 }
 
@@ -63,8 +64,22 @@ function sendKanjiArray(arr){
 	})
 }
 
+// this is gonna be messy. 
+function SortedKanjiArr(){
+	// take array and compare it with the counted
+	let kanjiArray = createKanjiArr(userInput) 
+	let countedKanjiObj = countKanji(kanjiArray);
+	function compareFrequency(a, b) {
+		return countedKanjiObj[b] - countedKanjiObj[a];
+	}
+	kanjiArray.sort(compareFrequency);
+	return kanjiArray;
+}
+
 // is it possible to make this cleaner? idk 
+// arrr is an arr of objects containing kanji info
 function createKanjiList(arr){
+	SortedKanjiArr(); 
 	$("#kanjiInfo").empty();
 	for (i=0; i<arr.length; i++){
 		arr[i] = JSON.parse(arr[i]);
@@ -89,6 +104,7 @@ function createKanjiList(arr){
 // lets keep this simple with just functions. 
 function buttonClick(){
 	event.preventDefault();
+	userInput = $("#kanjiInput").val().trim();
 	let Kanjiarr = makeArrofKanjiFromInput();
 	Kanjiarr = removeDuplicatesFromArray(Kanjiarr)
 	sendKanjiArray(Kanjiarr);
