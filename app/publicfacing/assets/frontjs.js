@@ -93,23 +93,31 @@ function sendKanjiArray(arr){
 // arrr is an arr of objects containing kanji info
 function createKanjiList(arr){
 
-	
-	console.log(arr)
+	// maybe this should  be its own function but whatever it works. 
+	let countedKanjiObj = countKanji(Kanjiarr);
+	for (i=0; i<arr.length; i++){
+		arr[i] = JSON.parse(arr[i]);
+		arr[i].count = countedKanjiObj[arr[i].kanji]
+	}
 
 	$("#kanjiInfo").empty();
 	for (i=0; i<arr.length; i++){
-		arr[i] = JSON.parse(arr[i]);
 		let li = $("<li>");
 		let divKanji = $("<div>");
 		let divJLPT = $("<div>");
 		let divEN = $("<div>");
+		let divCount = $("<div>");
 
 		li.attr('id', 'kanji' + i);
 		divKanji.text("Egnlish: " + arr[i].kanji);
 		divEN.text("Egnlish: " + arr[i].heisig_en);
 		divJLPT.text("JLPT N" + arr[i].jlpt);
+		divCount.text("Frequency: " + arr[i].count);
+
 		$("#kanjiInfo").append(li);
+
 		$("#kanji" + i).append(divKanji);
+		$("#kanji" + i).append(divCount);
 		$("#kanji" + i).append(divEN);
 		$("#kanji" + i).append(divJLPT);
 	}
