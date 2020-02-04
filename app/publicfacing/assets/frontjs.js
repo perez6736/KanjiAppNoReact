@@ -14,6 +14,16 @@ var SortedKanjiArr;
 
 // helper functions
 
+// this takes an arr of objects and adds count of kanji to it 
+function addCountToObject(arr){
+	let countedObject = countKanji(Kanjiarr);
+	for (i=0; i<arr.length; i++){
+		arr[i] = JSON.parse(arr[i]);
+		arr[i].count = countedObject[arr[i].kanji]
+	}
+}
+
+
 // return object of counted kanjis 
 // function accepts only arrays! 
 function countKanji(inputArray){
@@ -93,12 +103,9 @@ function sendKanjiArray(arr){
 // arrr is an arr of objects containing kanji info
 function createKanjiList(arr){
 
-	// maybe this should  be its own function but whatever it works. 
-	let countedKanjiObj = countKanji(Kanjiarr);
-	for (i=0; i<arr.length; i++){
-		arr[i] = JSON.parse(arr[i]);
-		arr[i].count = countedKanjiObj[arr[i].kanji]
-	}
+	// add the  count so we can display it. 
+	// this function has the json parse in it. 
+	addCountToObject(arr)
 
 	$("#kanjiInfo").empty();
 	for (i=0; i<arr.length; i++){
