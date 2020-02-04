@@ -8,9 +8,14 @@
 
 var userInput;
 
-//return a bool if kanji exists in text. 
-function doesKanjiExist(ch){
-	return (ch >= "\u4e00" && ch <= "\u9faf") || (ch >= "\u3400" && ch <= "\u4dbf") || ch === "𠮟";
+// helper functions
+
+// return object of counted kanjis 
+// function accepts only arrays! 
+function countKanji(inputArray){
+	//count dups in array 
+	let count = inputArray.reduce(tallyupelements, {});
+	return count; 
 }
 
 // takes an input of text and spits out an array of kanji
@@ -26,27 +31,9 @@ function createKanjiArr(input){
 	return kanjiOnlyArr;
 }
 
-// accumalator for reduce function. 
-function tallyupelements(obj, word){
-	if(!obj[word]){
-		obj[word] = 0; 
-	}
-	obj[word] ++;
-	return obj;
-}
-
-// return object of counted kanjis 
-// function accepts only arrays! 
-function countKanji(inputArray){
-	//count dups in array 
-	let count = inputArray.reduce(tallyupelements, {});
-	return count; 
-}
-
-// removes dups from an array 
-function removeDuplicatesFromArray(arr){
-	return arr.reduce((unique, item)=>
-	unique.includes(item) ? unique : [...unique, item], [])
+//return a bool if kanji exists in text. 
+function doesKanjiExist(ch){
+	return (ch >= "\u4e00" && ch <= "\u9faf") || (ch >= "\u3400" && ch <= "\u4dbf") || ch === "𠮟";
 }
 
 // this makes an arr of kanji from the input text box 
@@ -56,15 +43,8 @@ function makeArrofKanjiFromInput (){
 	return Input;
 }
 
-// this send an array of kanji to the server. 
-function sendKanjiArray(arr){
-	// send an array of kanji 
-	$.get("/api/kanji", {kanji: arr}, function(data){
-		createKanjiList(data);
-	})
-}
-
-// this is gonna be messy. 
+// sorts kanji by frequency
+// i think this should take a parameter.  
 function SortedKanjiArr(){
 	// take array and compare it with the counted
 	let kanjiArray = createKanjiArr(userInput) 
@@ -76,10 +56,39 @@ function SortedKanjiArr(){
 	return kanjiArray;
 }
 
+// removes dups from an array 
+function removeDuplicatesFromArray(arr){
+	return arr.reduce((unique, item)=>
+	unique.includes(item) ? unique : [...unique, item], [])
+}
+
+// accumalator for reduce function. 
+function tallyupelements(obj, word){
+	if(!obj[word]){
+		obj[word] = 0; 
+	}
+	obj[word] ++;
+	return obj;
+}
+
+// this send an array of kanji to the server. 
+function sendKanjiArray(arr){
+	// send an array of kanji 
+	$.get("/api/kanji", {kanji: arr}, function(data){
+		// this gets data back from 
+		createKanjiList(data);
+	})
+}
+
+// DOM related function 
+
 // is it possible to make this cleaner? idk 
 // arrr is an arr of objects containing kanji info
 function createKanjiList(arr){
-	SortedKanjiArr(); 
+	// SortedKanjiArr(); - this is soreted arr of the most frequent kanji. 
+	// the arr is arr of objects that is unsorted 
+	
+	console.log(arr) 
 	$("#kanjiInfo").empty();
 	for (i=0; i<arr.length; i++){
 		arr[i] = JSON.parse(arr[i]);
@@ -99,7 +108,7 @@ function createKanjiList(arr){
 	}
 }
 
-
+//EVENT LISTNERS --------------
 
 // lets keep this simple with just functions. 
 function buttonClick(){
