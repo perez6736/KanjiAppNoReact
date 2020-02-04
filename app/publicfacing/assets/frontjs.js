@@ -1,10 +1,3 @@
-// I dont think i need this 
-// function aJax(URL, METHOD, CALLBACK){ 
-// 	$.ajax({
-// 		url: URL,
-// 		method: METHOD
-// 	}).done(CALLBACK);
-// }
 
 // Global Variables - maybe bad idea... but we will see 
 var userInput;
@@ -22,7 +15,6 @@ function addCountToObject(arr){
 		arr[i].count = countedObject[arr[i].kanji]
 	}
 }
-
 
 // return object of counted kanjis 
 // function accepts only arrays! 
@@ -116,6 +108,7 @@ function createKanjiList(arr){
 		let divCount = $("<div>");
 
 		li.attr('id', 'kanji' + i);
+		li.addClass("KanjiInfo");
 		divKanji.text("Egnlish: " + arr[i].kanji);
 		divEN.text("Egnlish: " + arr[i].heisig_en);
 		divJLPT.text("JLPT N" + arr[i].jlpt);
