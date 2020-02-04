@@ -1,6 +1,15 @@
 # KanjiAppNoReact
 A simple web application that will allow me to enter a text of japanese and tell me data about the kanji chaaracters used. 
 
+Tech used 
+Backend
+- Node.js 
+- Express.js 
+FrontEnd 
+- HTML 
+- CSS 
+- Javascript 
+
 Since this only cares about the kanji characters in theory it should work for chinese but I am using a dictionary based of the Japanese usage of the characters. 
 
 Things app will be able to do. 
@@ -13,3 +22,5 @@ Hopefully It will be able to support different users
 - provide analytics of kanji usage 
 - provide most used vocabulary word from most common kanji 
 
+Future hopes 
+- refactor front end to use react.js 
