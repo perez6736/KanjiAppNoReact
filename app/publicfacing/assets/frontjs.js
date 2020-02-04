@@ -6,7 +6,11 @@
 // 	}).done(CALLBACK);
 // }
 
+// Global Variables - maybe bad idea... but we will see 
 var userInput;
+var Kanjiarr;
+var KanjiarrUnique;
+var SortedKanjiArr;
 
 // helper functions
 
@@ -37,23 +41,24 @@ function doesKanjiExist(ch){
 }
 
 // this makes an arr of kanji from the input text box 
-function makeArrofKanjiFromInput (){
-	let Input = userInput  
+// put user input here 
+function makeArrofKanjiFromInput (arr){
+	let Input = arr  
 	Input = createKanjiArr(Input); //array of kanjis only 
 	return Input;
 }
 
 // sorts kanji by frequency
 // i think this should take a parameter.  
-function SortedKanjiArr(){
+// param is user input 
+function SortKanjiArr(arr){
 	// take array and compare it with the counted
-	let kanjiArray = createKanjiArr(userInput) 
-	let countedKanjiObj = countKanji(kanjiArray);
+	let countedKanjiObj = countKanji(arr);
 	function compareFrequency(a, b) {
 		return countedKanjiObj[b] - countedKanjiObj[a];
 	}
-	kanjiArray.sort(compareFrequency);
-	return kanjiArray;
+	arr.sort(compareFrequency);
+	return arr;
 }
 
 // removes dups from an array 
@@ -71,12 +76,14 @@ function tallyupelements(obj, word){
 	return obj;
 }
 
+// request related functions 
+
 // this send an array of kanji to the server. 
 function sendKanjiArray(arr){
 	// send an array of kanji 
 	$.get("/api/kanji", {kanji: arr}, function(data){
 		// this gets data back from 
-		createKanjiList(data);
+		createKanjiList(data); // its an array of objects 
 	})
 }
 
@@ -85,10 +92,10 @@ function sendKanjiArray(arr){
 // is it possible to make this cleaner? idk 
 // arrr is an arr of objects containing kanji info
 function createKanjiList(arr){
-	// SortedKanjiArr(); - this is soreted arr of the most frequent kanji. 
-	// the arr is arr of objects that is unsorted 
+
 	
-	console.log(arr) 
+	console.log(arr)
+
 	$("#kanjiInfo").empty();
 	for (i=0; i<arr.length; i++){
 		arr[i] = JSON.parse(arr[i]);
@@ -114,9 +121,11 @@ function createKanjiList(arr){
 function buttonClick(){
 	event.preventDefault();
 	userInput = $("#kanjiInput").val().trim();
-	let Kanjiarr = makeArrofKanjiFromInput();
-	Kanjiarr = removeDuplicatesFromArray(Kanjiarr)
-	sendKanjiArray(Kanjiarr);
+	Kanjiarr = makeArrofKanjiFromInput(userInput); // removes non kanji
+	SortedKanjiArr = SortKanjiArr(Kanjiarr); // sorts kanji
+	KanjiarrUnique = removeDuplicatesFromArray(SortedKanjiArr) // removes dupes 
+
+	sendKanjiArray(KanjiarrUnique); // send to server
 }
 
 //button click handler. 
