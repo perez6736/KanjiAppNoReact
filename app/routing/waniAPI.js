@@ -21,8 +21,6 @@ module.exports = function(app) {
 
         const promise = KanjiParam.map(word => new Promise (resolve => {
             getKanji({url: 'https://kanjiapi.dev/v1/kanji/' + encodeURIComponent(word)}, function(body){
-                // body is a string that looks like object :(
-                    // json.parse will fix
                 resolve(body);
             })
         }))
@@ -31,7 +29,6 @@ module.exports = function(app) {
         })
     });
 }
-
 
 //new kanji api 
 function getKanji(url, callback){

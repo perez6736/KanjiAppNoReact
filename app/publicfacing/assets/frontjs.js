@@ -99,27 +99,38 @@ function createKanjiList(arr){
 	// this function has the json parse in it. 
 	addCountToObject(arr)
 
-	$("#kanjiInfo").empty();
+	$("#Kanji-List").empty();
 	for (i=0; i<arr.length; i++){
-		let li = $("<li>");
+		// define the divs 
+		let divSingleKanjiContainer = $("<div>");
+		let divKanjiInfo = $("<div>");
 		let divKanji = $("<div>");
 		let divJLPT = $("<div>");
 		let divEN = $("<div>");
 		let divCount = $("<div>");
 
-		li.attr('id', 'kanji' + i);
-		li.addClass("KanjiInfo");
-		divKanji.text("Egnlish: " + arr[i].kanji);
+		//give the attr
+		divSingleKanjiContainer.attr('id', 'kanji' + i);
+		divSingleKanjiContainer.addClass("Kanji-wrapper")
+		divKanjiInfo.addClass("Kanji-Info")
+		divKanji.addClass("Kanji");
+		divJLPT.addClass("JLPT-level");
+		divEN.addClass("Kanji-English");
+		divCount.addClass("Kanji-Count");
+
+		// set text 
+		divKanji.text(arr[i].kanji);
 		divEN.text("Egnlish: " + arr[i].heisig_en);
 		divJLPT.text("JLPT N" + arr[i].jlpt);
 		divCount.text("Frequency: " + arr[i].count);
 
-		$("#kanjiInfo").append(li);
-
+		// append it all 
+		$("#Kanji-List").append(divSingleKanjiContainer);
 		$("#kanji" + i).append(divKanji);
-		$("#kanji" + i).append(divCount);
-		$("#kanji" + i).append(divEN);
-		$("#kanji" + i).append(divJLPT);
+		divSingleKanjiContainer.append(divKanjiInfo);
+		divKanjiInfo.append(divCount);
+		divKanjiInfo.append(divEN);
+		divKanjiInfo.append(divJLPT);
 	}
 }
 

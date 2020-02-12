@@ -1,5 +1,39 @@
-li.KanjiInfo {
-    border-style: solid;
-    width: 10%;
-    margin: 2px;
+/* text box */
+#kanjiInput {
+    width: 75%;
+    height: 33%
+}
+
+/* left side of screen */
+#input-container {
+    float: left;
+    width: 50%
+}
+
+/* right side of screen */
+#kanji-container {
+    float: right;
+    width: 50%
+}
+
+/* The Kanji wrapper */
+.Kanji-wrapper {
+    float: left;
+    width: 100%;
+    margin-bottom: 5px;
+
+}
+
+/* The Kanji */
+.Kanji {
+    float: left;
+    font-weight: bold;
+    border: solid;
+    font-size: 3rem;
+    margin-right: 5px;
+}
+
+/* Kanji Information */
+.Kanji-Info{
+    float: left;
 }
