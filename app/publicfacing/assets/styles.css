@@ -28,9 +28,9 @@
 .Kanji {
     float: left;
     font-weight: bold;
-    border: solid;
     font-size: 3rem;
     margin-right: 5px;
+    background: bisque;
 }
 
 /* Kanji Information */
