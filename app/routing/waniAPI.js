@@ -1,7 +1,7 @@
 // this will need to change when i push it to heroku. 
-var WKkeys = require('../../configkeys/apiKeys.js');
+// var WKkeys = require('../../configkeys/apiKeys.js');
 const request = require('request');
-var key = WKkeys.apiKeys.waniKani;
+// var key = WKkeys.apiKeys.waniKani;
 
 
 //
