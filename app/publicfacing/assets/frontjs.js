@@ -120,7 +120,7 @@ function createKanjiList(arr){
 
 		// set text 
 		divKanji.text(arr[i].kanji);
-		divEN.text("Egnlish: " + arr[i].heisig_en);
+		divEN.text("English: " + arr[i].heisig_en);
 		divJLPT.text("JLPT N" + arr[i].jlpt);
 		divCount.text("Frequency: " + arr[i].count);
 
