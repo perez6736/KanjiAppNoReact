@@ -37,6 +37,16 @@ function createKanjiArr(input){
 	return kanjiOnlyArr;
 }
 
+function doesKanjiExistinInput(arr){
+	for(i=0; i<arr.length; i++){
+		console.log(i)
+		if(doesKanjiExist(arr[i])){
+			return true;
+		}
+	}
+	return false;
+}
+
 //return a bool if kanji exists in text. 
 function doesKanjiExist(ch){
 	return (ch >= "\u4e00" && ch <= "\u9faf") || (ch >= "\u3400" && ch <= "\u4dbf") || ch === "𠮟";
@@ -139,12 +149,19 @@ function createKanjiList(arr){
 // lets keep this simple with just functions. 
 function buttonClick(){
 	event.preventDefault();
+	$("#error-text").hide();
 	userInput = $("#kanjiInput").val().trim();
-	Kanjiarr = makeArrofKanjiFromInput(userInput); // removes non kanji
-	SortedKanjiArr = SortKanjiArr(Kanjiarr); // sorts kanji
-	KanjiarrUnique = removeDuplicatesFromArray(SortedKanjiArr) // removes dupes 
+	if(doesKanjiExistinInput(userInput)){
+		Kanjiarr = makeArrofKanjiFromInput(userInput); // removes non kanji
+		SortedKanjiArr = SortKanjiArr(Kanjiarr); // sorts kanji
+		KanjiarrUnique = removeDuplicatesFromArray(SortedKanjiArr) // removes dupes 
+		sendKanjiArray(KanjiarrUnique); // send to server
+	}
+	else{
+		$("#error-text").show();
+		console.log("no kanji in input. ");
+	}
 
-	sendKanjiArray(KanjiarrUnique); // send to server
 }
 
 //button click handler. 
