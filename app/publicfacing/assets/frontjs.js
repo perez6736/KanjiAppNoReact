@@ -4,6 +4,7 @@ var userInput;
 var Kanjiarr;
 var KanjiarrUnique;
 var SortedKanjiArr;
+var KanjiObject; 
 
 // helper functions
 
@@ -63,7 +64,7 @@ function makeArrofKanjiFromInput (arr){
 // sorts kanji by frequency
 // i think this should take a parameter.  
 // param is user input 
-function SortKanjiArr(arr){
+function SortKanjiArrByFrequency(arr){
 	// take array and compare it with the counted
 	let countedKanjiObj = countKanji(arr);
 	function compareFrequency(a, b) {
@@ -71,6 +72,11 @@ function SortKanjiArr(arr){
 	}
 	arr.sort(compareFrequency);
 	return arr;
+}
+
+// needs array of kanji objects
+function SortKanjiByJLPT(arr){
+	//
 }
 
 // removes dups from an array 
@@ -95,6 +101,11 @@ function sendKanjiArray(arr){
 	// send an array of kanji 
 	$.get("/api/kanji", {kanji: arr}, function(data){
 		// this gets data back from 
+		KanjiObject = data;
+
+		// add the  count so we can display it. 
+		// this function has the json parse in it. 
+		addCountToObject(data);
 		createKanjiList(data); // its an array of objects 
 	})
 }
@@ -104,10 +115,6 @@ function sendKanjiArray(arr){
 // is it possible to make this cleaner? idk 
 // arrr is an arr of objects containing kanji info
 function createKanjiList(arr){
-
-	// add the  count so we can display it. 
-	// this function has the json parse in it. 
-	addCountToObject(arr)
 
 	$("#Kanji-List").empty();
 	for (i=0; i<arr.length; i++){
@@ -153,9 +160,10 @@ function buttonClick(){
 	userInput = $("#kanjiInput").val().trim();
 	if(doesKanjiExistinInput(userInput)){
 		Kanjiarr = makeArrofKanjiFromInput(userInput); // removes non kanji
-		SortedKanjiArr = SortKanjiArr(Kanjiarr); // sorts kanji
+		SortedKanjiArr = SortKanjiArrByFrequency(Kanjiarr); // sorts kanji
 		KanjiarrUnique = removeDuplicatesFromArray(SortedKanjiArr) // removes dupes 
 		sendKanjiArray(KanjiarrUnique); // send to server
+
 	}
 	else{
 		$("#error-text").show();
