@@ -52,6 +52,10 @@ function doesKanjiExist(ch){
 	return (ch >= "\u4e00" && ch <= "\u9faf") || (ch >= "\u3400" && ch <= "\u4dbf") || ch === "𠮟";
 }
 
+function sortKanji(){
+	// 
+}
+
 // this makes an arr of kanji from the input text box 
 // put user input here 
 function makeArrofKanjiFromInput (arr){
