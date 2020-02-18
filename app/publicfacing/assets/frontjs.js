@@ -52,18 +52,6 @@ function doesKanjiExist(ch){
 	return (ch >= "\u4e00" && ch <= "\u9faf") || (ch >= "\u3400" && ch <= "\u4dbf") || ch === "𠮟";
 }
 
-function sortKanjiHTMLFromRadioButton(frequency, JLPT){
-	// check which radio button is selected. 
-	if(frequency){
-		// sort by frequency 
-		// SortKanjiArrByFrequency() - already exists 
-	}
-	else if(JLPT){
-		// sort by JLPT 
-		// SortKanjiByJLPT()
-	}
-}
-
 // this makes an arr of kanji from the input text box 
 // put user input here 
 function makeArrofKanjiFromInput (arr){
@@ -72,22 +60,25 @@ function makeArrofKanjiFromInput (arr){
 	return Input;
 }
 
-// sorts kanji by frequency
-// i think this should take a parameter.  
+// sorts kanji by frequency 
 // param is user input 
-function SortKanjiArrByFrequency(arr){
+function SortKanjiArrByCount(arr){
 	// take array and compare it with the counted
-	let countedKanjiObj = countKanji(arr);
-	function compareFrequency(a, b) {
-		return countedKanjiObj[b] - countedKanjiObj[a];
+	function compare (a,b){
+		return b.count - a.count; 
 	}
-	arr.sort(compareFrequency);
-	return arr;
+	let sortarr = arr.sort(compare);
+	return sortarr; 
 }
 
 // needs array of kanji objects
 function SortKanjiByJLPT(arr){
-	//
+	// take array and compare it with the counted
+	function compare (a,b){
+		return b.jlpt - a.jlpt; 
+	}
+	let sortarr = arr.sort(compare);
+	return sortarr; 
 }
 
 // removes dups from an array 
@@ -116,8 +107,8 @@ function sendKanjiArray(arr){
 
 		// add the  count so we can display it. 
 		// this function has the json parse in it. 
-		addCountToObject(data);
-		createKanjiList(data); // its an array of objects 
+		addCountToObject(KanjiObject);
+		sortKanji(); // its an array of objects 
 	})
 }
 
@@ -173,8 +164,7 @@ function buttonClick(){
 	userInput = $("#kanjiInput").val().trim();
 	if(doesKanjiExistinInput(userInput)){
 		Kanjiarr = makeArrofKanjiFromInput(userInput); // removes non kanji
-		SortedKanjiArr = SortKanjiArrByFrequency(Kanjiarr); // sorts kanji
-		KanjiarrUnique = removeDuplicatesFromArray(SortedKanjiArr) // removes dupes 
+		KanjiarrUnique = removeDuplicatesFromArray(Kanjiarr) // removes dupes 
 		sendKanjiArray(KanjiarrUnique); // send to server
 
 	}
@@ -187,7 +177,13 @@ function buttonClick(){
 
 function sortKanji(){
 	// sortKanjiHTMLFromRadioButton()
-	console.log("sort Kanji")
+	if($("#sortCountID").is(':checked')){
+		createKanjiList(SortKanjiArrByCount(KanjiObject));
+	}
+	else if($("#sortJLPTID").is(':checked')){
+		createKanjiList(SortKanjiByJLPT(KanjiObject));
+	}
+
 }
 
 //button click handler. 
