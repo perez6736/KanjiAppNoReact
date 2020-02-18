@@ -40,7 +40,6 @@ function createKanjiArr(input){
 
 function doesKanjiExistinInput(arr){
 	for(i=0; i<arr.length; i++){
-		console.log(i)
 		if(doesKanjiExist(arr[i])){
 			return true;
 		}
@@ -127,7 +126,9 @@ function createKanjiList(arr){
 		let divCount = $("<div>");
 
 		//give the attr
-		divSingleKanjiContainer.attr('id', 'kanji' + i);
+		divSingleKanjiContainer.attr('data-Kanji', arr[i].kanji);
+		divSingleKanjiContainer.attr('data-Count', arr[i].count);
+		divSingleKanjiContainer.attr('data-JLPT', arr[i].jlpt);
 		divSingleKanjiContainer.addClass("Kanji-wrapper")
 		divKanjiInfo.addClass("Kanji-Info")
 		divKanji.addClass("Kanji");
@@ -143,7 +144,7 @@ function createKanjiList(arr){
 
 		// append it all 
 		$("#Kanji-List").append(divSingleKanjiContainer);
-		$("#kanji" + i).append(divKanji);
+		divSingleKanjiContainer.append(divKanji);
 		divSingleKanjiContainer.append(divKanjiInfo);
 		divKanjiInfo.append(divCount);
 		divKanjiInfo.append(divEN);
