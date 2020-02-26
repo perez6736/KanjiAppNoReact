@@ -19,6 +19,7 @@ module.exports = function(app) {
         let KanjiParam = req.query.kanji;
         console.log(req.query.kanji)
 
+        // this maybe a controller i need to add? but this servers one purpose for now. 
         const promise = KanjiParam.map(word => new Promise (resolve => {
             getKanji({url: 'https://kanjiapi.dev/v1/kanji/' + encodeURIComponent(word)}, function(body){
                 resolve(body);

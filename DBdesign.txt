@@ -1,0 +1,6 @@
+What do i want to do that might need a DB?? 
+- I want to eventually support users and have them search there most frequent Kanjis. 
+- I want to Store all the kanjis with their meaning, JLPT level, Readings** and jyoyo grade 
+- I want to show be able to show the user a history of all the kanji thhey have ran into 
+
+Tables I might need in order to do this. 
