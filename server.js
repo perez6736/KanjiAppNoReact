@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // need this to use the js file and css file for the html pages. 
-app.use(express.static(__dirname + '/app/publicfacing'));
+app.use(express.static(__dirname + '/app/View'));
 
 //Router
 require("./app/routing/waniAPI")(app);

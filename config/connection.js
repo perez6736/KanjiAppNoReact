@@ -1,5 +1,5 @@
 // dependencies ===================================================== 
-var mysqlv= require('mysql');
+var mysql= require('mysql');
 
 // DB connection =====================================
 var connection;
@@ -11,7 +11,7 @@ if(process.env.JAWSDB_URL){
     host     : "localhost",
     user     : "root",
     password : "mysqlppw123",
-    database : "burgers_db"
+    database : "kanjisearch"
   });
 }
 
