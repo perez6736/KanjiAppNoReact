@@ -31,6 +31,10 @@ module.exports = function(app) {
     });
 }
 
+
+
+// helper function for the API 
+
 //new kanji api 
 function getKanji(url, callback){
     request(url, function(error, response, body) {

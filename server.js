@@ -16,6 +16,7 @@ app.use(express.static(__dirname + '/app/publicfacing'));
 //Router
 require("./app/routing/waniAPI")(app);
 require("./app/routing/htmlRoute")(app);
+var routes = require("./app/Controller/KanjiController.js");
 
 // Listner 
 
