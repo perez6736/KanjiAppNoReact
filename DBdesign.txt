@@ -4,3 +4,28 @@ What do i want to do that might need a DB??
 - I want to show be able to show the user a history of all the kanji thhey have ran into 
 
 Tables I might need in order to do this. 
+
+Users Table 
+- ID
+- username
+- pw (encrpyed)
+- first name 
+- last name 
+- email 
+
+Kanji Table 
+- ID 
+- Kanji 
+- grade
+- english
+- kunReading 
+- onReading
+- JLPTlevel 
+- unicode  
+
+UsersKanji Table 
+- ID
+- KanjiID - foreign key 
+- Kanji (maybe)
+- UserID - foreign key 
+
