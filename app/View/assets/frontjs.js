@@ -117,6 +117,19 @@ function sendKanjiArray(arr){
 	})
 }
 
+// if kanji is missing from our dictionary we want to add it. 
+function sendKanjitoDB(kanjiDataObject){
+	$.post("/kanji-dictionary", kanjiDataObject, function(data){
+		console.log("posted kanji to dicitonary")
+	})
+}
+// we will want to see all kanji information eentually 
+function sendKanjitoDB(kanjiDataObject){
+	$.get("/kanji-dictionary", kanjiDataObject, function(data){
+		console.log("get kanjis")
+	})
+}
+
 // DOM related function 
 
 // is it possible to make this cleaner? idk 
@@ -182,7 +195,8 @@ function buttonClick(){
 }
 
 function AddtoDB (){
-	// just need to send the json object to the server. 
+	// just need to send the json object to the server.
+	sendKanjitoDB(KanjiObject);
 	console.log(KanjiObject); 
 }
 
