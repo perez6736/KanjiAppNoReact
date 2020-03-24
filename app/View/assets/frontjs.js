@@ -9,6 +9,8 @@ var KanjiObject;
 // helper functions
 
 // this takes an arr of objects and adds count of kanji to it 
+// adds frequency of kanji to the kanji object. 
+// makes the arr into an object too 
 function addCountToObject(arr){
 	let countedObject = countKanji(Kanjiarr);
 	for (i=0; i<arr.length; i++){
@@ -19,6 +21,7 @@ function addCountToObject(arr){
 
 // return object of counted kanjis 
 // function accepts only arrays! 
+// this is used in the addCounttoObject to get frequency of kanji 
 function countKanji(inputArray){
 	//count dups in array 
 	let count = inputArray.reduce(tallyupelements, {});
@@ -27,6 +30,7 @@ function countKanji(inputArray){
 
 // takes an input of text and spits out an array of kanji
 // if no kanji exits then it returns empty array. 
+// this function is what is originally called before sending to api 
 function createKanjiArr(input){
 	let inputArr = input.split("");
 	let kanjiOnlyArr = []; 
@@ -105,10 +109,11 @@ function sendKanjiArray(arr){
 		// this gets data back from 
 		KanjiObject = data;
 
-		// add the  count so we can display it. 
+		// add the count so we can display it. 
 		// this function has the json parse in it. 
+		// we need to turn array into object here and add count. 
 		addCountToObject(KanjiObject);
-		sortKanji(); // its an array of objects 
+		sortKanji(); //radio button function - need to know how to display the kanji intially 
 	})
 }
 
@@ -163,6 +168,7 @@ function buttonClick(){
 	$("#error-text").hide();
 	userInput = $("#kanjiInput").val().trim();
 	if(doesKanjiExistinInput(userInput)){
+		$('#SortKanjiRadio').show();
 		Kanjiarr = makeArrofKanjiFromInput(userInput); // removes non kanji
 		KanjiarrUnique = removeDuplicatesFromArray(Kanjiarr) // removes dupes 
 		sendKanjiArray(KanjiarrUnique); // send to server
@@ -175,8 +181,12 @@ function buttonClick(){
 
 }
 
+function AddtoDB (){
+	// just need to send the json object to the server. 
+	console.log(KanjiObject); 
+}
+
 function sortKanji(){
-	// sortKanjiHTMLFromRadioButton()
 	if($("#sortCountID").is(':checked')){
 		createKanjiList(SortKanjiArrByCount(KanjiObject));
 	}
@@ -188,3 +198,4 @@ function sortKanji(){
 
 //button click handler. 
 $(document).on("click", "#submit-kanji-button", buttonClick);
+$(document).on("click", "#addKanjitoDB", AddtoDB);

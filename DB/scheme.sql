@@ -2,45 +2,38 @@ CREATE DATABASE kanjiSearch;
 USE kanjiSearch;
 
 CREATE TABLE kanji(
-    kanji_id INT AUTO_INCREMENT NOT NULL,
-    kanji VARCHAR(10) NOT NULL CHARACTER SET utf8,
+    kanji_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    kanji VARCHAR(10) CHARACTER SET utf8 NOT NULL,
     grade VARCHAR(255),
-    JLPTlevel INT
+    JLPTlevel INT,
     english VARCHAR(255),
     kunReading VARCHAR(255) CHARACTER SET utf8,
     onReading VARCHAR(255) CHARACTER SET utf8,
-    unicode VARCHAR(10)
-
-    PK_kanji PRIMARY KEY ( kanji_id)
+    unicodeValue VARCHAR(10)
 );
 
-CREATE TABLE user(
-    user_id INT AUTO_INCREMENT NOT NULL,
-    username NOT NULL,
-    userPassword NOT NULL,
-    firstName,
-    lastName,
-    email NOT NULL
-
-
-    PK_user PRIMARY KEY (user_id)
+CREATE TABLE users(
+    user_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    userPassword VARCHAR(255) NOT NULL,
+    firstName VARCHAR(255),
+    lastName VARCHAR(255),
+    email VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE kanji_user(
-    kanji_user_id INT AUTO_INCREMENT NOT NULL,
-    kanji_id,
-    user_id
-
-    PK_kanji_user PRIMARY KEY (ikanji_user_idd)
+CREATE TABLE kanji_users(
+    kanji_user_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    kanji_id INT,
+    user_id INT
 );
 
 -- Add the alter table to add the foreign key to kanji_user
-ALTER TABLE kanji_user
-ADD CONSTRAINT FK_kanji_user
+ALTER TABLE kanji_users
+ADD CONSTRAINT kanji_id
 FOREIGN KEY (kanji_id)
-REFERENCES kanji (kanji_id)
+REFERENCES kanji (kanji_id);
 
-ALTER TABLE kanji_user
-ADD CONSTRAINT FK_user_kanji
+ALTER TABLE kanji_users
+ADD CONSTRAINT user_id
 FOREIGN KEY (user_id)
-REFERENCES user (user_id)
+REFERENCES users (user_id);
