@@ -118,15 +118,16 @@ function sendKanjiArray(arr){
 }
 
 // if kanji is missing from our dictionary we want to add it. 
-function sendKanjitoDB(kanjiDataObject){
-	$.post("/kanji-dictionary", kanjiDataObject, function(data){
+// initially we will use this to add all the kanji to the database. 
+function addKanjitoDB(kanjiDataObject){
+	$.post("/db/intitKanjiAdd", kanjiDataObject, function(data){
 		console.log("posted kanji to dicitonary")
 	})
 }
-// we will want to see all kanji information eentually 
-function sendKanjitoDB(kanjiDataObject){
+// we will want to see all kanji information eventually 
+function getAllKanji(kanjiDataObject){
 	$.get("/kanji-dictionary", kanjiDataObject, function(data){
-		console.log("get kanjis")
+		console.log("get all kanjis")
 	})
 }
 
@@ -196,7 +197,7 @@ function buttonClick(){
 
 function AddtoDB (){
 	// just need to send the json object to the server.
-	sendKanjitoDB(KanjiObject);
+	addKanjitoDB({kanji: KanjiObject});
 	console.log(KanjiObject); 
 }
 

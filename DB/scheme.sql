@@ -6,6 +6,7 @@ CREATE TABLE kanji(
     kanji VARCHAR(10) CHARACTER SET utf8 NOT NULL,
     grade VARCHAR(255),
     JLPTlevel INT,
+    strokeCount INT,
     english VARCHAR(255),
     kunReading VARCHAR(255) CHARACTER SET utf8,
     onReading VARCHAR(255) CHARACTER SET utf8,
