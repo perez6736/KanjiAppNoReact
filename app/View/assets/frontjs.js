@@ -124,6 +124,12 @@ function addKanjitoDB(kanjiDataObject){
 		console.log("posted kanji to dicitonary")
 	})
 }
+
+// we just want to send one kanji and add it to DB
+function addOneKanjitoDB(){
+
+}
+
 // we will want to see all kanji information eventually 
 function getAllKanji(kanjiDataObject){
 	$.get("/kanji-dictionary", kanjiDataObject, function(data){
@@ -146,6 +152,10 @@ function createKanjiList(arr){
 		let divJLPT = $("<div>");
 		let divEN = $("<div>");
 		let divCount = $("<div>");
+		let addtoDBbutton = $('<button/>', {
+			text: "add " + arr[i].kanji + " to DB",
+			addClass: 'addSingleKanji'
+		  });
 
 		//give the attr
 		divSingleKanjiContainer.attr('data-Kanji', arr[i].kanji);
@@ -157,6 +167,7 @@ function createKanjiList(arr){
 		divJLPT.addClass("JLPT-level");
 		divEN.addClass("Kanji-English");
 		divCount.addClass("Kanji-Count");
+		addtoDBbutton.attr('data-Kanji', arr[i].kanji);
 
 		// set text 
 		divKanji.text(arr[i].kanji);
@@ -168,6 +179,7 @@ function createKanjiList(arr){
 		$("#Kanji-List").append(divSingleKanjiContainer);
 		divSingleKanjiContainer.append(divKanji);
 		divSingleKanjiContainer.append(divKanjiInfo);
+		divSingleKanjiContainer.append(addtoDBbutton);
 		divKanjiInfo.append(divCount);
 		divKanjiInfo.append(divEN);
 		divKanjiInfo.append(divJLPT);
@@ -201,6 +213,11 @@ function AddtoDB (){
 	console.log(KanjiObject); 
 }
 
+function AddSingleToDB(){
+	//addOneKanjitoDB();
+	console.log("we clicked " + $(this).data('kanji'))
+}
+
 function sortKanji(){
 	if($("#sortCountID").is(':checked')){
 		createKanjiList(SortKanjiArrByCount(KanjiObject));
@@ -214,3 +231,4 @@ function sortKanji(){
 //button click handler. 
 $(document).on("click", "#submit-kanji-button", buttonClick);
 $(document).on("click", "#addKanjitoDB", AddtoDB);
+$(document).on("click", ".addSingleKanji", AddSingleToDB);

@@ -5,19 +5,26 @@ var orm = require("../../config/orm");
 // orm functions that return relevant data. 
 
 var kanji = {
-    // all: get all burgers 
+    // all: get all kanji 
     all: function(cb){
         orm.all("kanji", function(res){
             cb(res);
         });
     },
-    // create: // create a burger
+
+    selectWhere: function(cols, vals, cb){
+        orm.selectWhere("kanji", cols, vals, function(res){
+            cb(res);
+        });
+    },
+
+    // create: // create a kanji
     create: function(cols, vals, cb){
         orm.create("kanji", cols, vals, function(res){
             cb(res);
         });
     },
-    // update: // update existing burger
+    // update: // update existing kanji
     update: function(objColVals, condition, cb){
         orm.update("kanji", objColVals, condition, function(res){
             cb(res);

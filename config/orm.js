@@ -54,6 +54,21 @@ function objToSql(ob) {
         cb(result);
       });
     },
+
+    selectWhere: function(tableInput, col, value, cb) {
+      var queryString = "SELECT * FROM " + tableInput;;
+      
+      queryString += "WHERE " + col;
+      queryString += " = " + value;
+
+      connection.query(queryString, function(err, result) {
+        if (err) {
+          throw err;
+        }
+        cb(result);
+      });
+    },
+
     create: function(table, cols, vals, cb) {
         //INSERT 
       var queryString = "INSERT INTO " + table;

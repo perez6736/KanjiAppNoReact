@@ -9,7 +9,6 @@ module.exports = function(app) {
 
     // this is the method to create all the kanji in the DB initally. 
     app.post("/db/intitKanjiAdd", function(req, res){
-        console.log('create a kanji in database ')
         let kanjiInfo = req.body.kanji
         if (kanjiInfo.length > 0){
             for (i=0; i<kanjiInfo.length; i++){
@@ -79,4 +78,12 @@ module.exports = function(app) {
         console.log('this will be delete?')
     });
 
+}
+
+// return a bool
+// do a select kanji from table - if exists true else false 
+function doesKanjiExistinDB(kanjicharacter){
+    kanji.selectWhere("kanji", kanjicharacter, function(res){
+        console.log(res);
+    });
 }
