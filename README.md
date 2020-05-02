@@ -5,6 +5,8 @@ Tech used
 Backend
 - Node.js 
 - Express.js 
+- MySQL DB 
+ 
 FrontEnd 
 - HTML 
 - CSS 
