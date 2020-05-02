@@ -17,15 +17,14 @@ CREATE TABLE users(
     user_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
     userPassword VARCHAR(255) NOT NULL,
-    firstName VARCHAR(255),
-    lastName VARCHAR(255),
     email VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE kanji_users(
     kanji_user_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     kanji_id INT,
-    user_id INT
+    user_id INT,
+    csv_upload_flag INT,
 );
 
 -- Add the alter table to add the foreign key to kanji_user

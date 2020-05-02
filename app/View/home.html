@@ -13,27 +13,27 @@
 <body>
     <div id="container">
             <!--this the form to inout kanji-->
-    <div id="input-container">
-        <form id="kanjiInput-Form">
-            <label> Please enter Japanese Text.</label>
-            <br>
-            <textarea id="kanjiInput"></textarea>
-            <input id ="submit-kanji-button" type="submit"></input>
-            <p id="error-text" style="display: none;" >There was no Kanji in the input. </p>
-        </form> 
-    </div>
-     
-    <!--Dump the kanji definitions and stuff here-->
-    <div id="kanji-container">
-        <div class="RadioButton" id="SortKanjiRadio" style="display: none;">
-            Frequency <input type="radio" onclick="javascript:sortKanji();" name="sort" id="sortCountID" checked> 
-            JLPT <input type="radio" onclick="javascript:sortKanji();" name="sort" id="sortJLPTID">
-            <input id ="addKanjitoDB" type="submit" value="Add to DB"></input>
+        <div id="input-container">
+            <form id="kanjiInput-Form">
+                <label> Please enter Japanese Text.</label>
+                <br>
+                <textarea id="kanjiInput"></textarea>
+                <input id ="submit-kanji-button" type="submit"></input>
+                <p id="error-text" style="display: none;" >There was no Kanji in the input. </p>
+            </form> 
         </div>
-        <div class="KanjiOutput">
-            <ul id="Kanji-List"></ul>
-        </div>
-    </div>  
+        
+        <!--Dump the kanji definitions and stuff here-->
+        <div id="kanji-container">
+            <div class="RadioButton" id="SortKanjiRadio" style="display: none;">
+                Frequency <input type="radio" onclick="javascript:sortKanji();" name="sort" id="sortCountID" checked> 
+                JLPT <input type="radio" onclick="javascript:sortKanji();" name="sort" id="sortJLPTID">
+                <input id ="addKanjitoDB" type="submit" value="Add to DB"></input>
+            </div>
+            <div class="KanjiOutput">
+                <ul id="Kanji-List"></ul>
+            </div>
+        </div>  
     </div>    
 </body>
 

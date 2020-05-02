@@ -1,0 +1,13 @@
+when i enter japanese text what happens. 
+
+The kanji will be added to kanji db 
+- I need to support users for these to functionalities - 
+link to kanji and user will be made to kanji users table 
+csv flag will be set to 0 (0 means not uploaded to csv) 
+
+Create a login page - 
+
+Username and pw field 
+sign in button and register button 
+
+
