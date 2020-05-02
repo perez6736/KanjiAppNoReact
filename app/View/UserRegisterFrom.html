@@ -7,39 +7,17 @@
     <title>KanjiApp</title>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="/assets/loginjs.js"></script>
+<script type="text/javascript" src="/assets/registrationjs.js"></script>
 <link rel="stylesheet" href="/assets/styles.css">
 </head>
 <body>
-    <header  style="text-align: center; font-size: large; font-weight: bold;">
-        User Registration
-    </header>
-    <div class="login-container">
-        <div>
-            <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
-        </div>
-
-        <div>
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-        </div>
-
-        <div>
-            <label for="cfmpsw"><b>Confirm Password</b></label>
-            <input type="cfmpassword" placeholder="Confirm Password" name="cfmpsw" required>
-        </div>
-
-        <div>
-            <label for="email"><b>Email</b></label>
-            <input type="email" placeholder="Enter Email" name="email" required>
-        </div>
-
-        <div class = "login-buttons-container">
-            <button type="submit">Register</button>
-        </div>
-        
-
+    <div class="registration-form">
+        <h1>registration Form</h1>
+        <form action="auth" method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="submit">
+        </form>
     </div>
-
 </body>
