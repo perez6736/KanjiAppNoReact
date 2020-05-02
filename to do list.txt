@@ -10,4 +10,12 @@ Create a login page -
 Username and pw field 
 sign in button and register button 
 
+- suport logging in with gmail or fb - in the future 
+
+- create a registration page 
+-- needs username / pw  and email field 
+-- when user submits data need to encode the pw and store encoding into db 
+
+
+
 

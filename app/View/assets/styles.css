@@ -37,3 +37,11 @@
 .Kanji-Info{
     float: left;
 }
+
+
+/* Stuff for login page */ 
+
+.login-container{
+    text-align: center;
+    padding-top: 15px;
+}
