@@ -20,3 +20,6 @@ sign in button and register button
 -- thoughts and things learnt 
 --- model files are typically used per controller or business need. so i have a need to auth users...
 --- any db interaction i need for that will go into models wehre i can use it later. 
+
+
+https://codeshack.io/basic-login-system-nodejs-express-mysql/
