@@ -19,6 +19,7 @@ CREATE TABLE users(
     userPassword VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL
 );
+INSERT INTO `users` (`id`, `username`, `password`, `email`) VALUES (1, 'test', 'test', 'test@test.com');
 
 CREATE TABLE kanji_users(
     kanji_user_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,

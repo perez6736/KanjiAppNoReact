@@ -17,5 +17,6 @@ sign in button and register button
 -- when user submits data need to encode the pw and store encoding into db 
 
 
-
-
+-- thoughts and things learnt 
+--- model files are typically used per controller or business need. so i have a need to auth users...
+--- any db interaction i need for that will go into models wehre i can use it later. 

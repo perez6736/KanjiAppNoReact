@@ -6,6 +6,11 @@ module.exports = function(app) {
   
     // home route 
     app.get("/", function(req, res) {
+        res.sendFile(path.join(__dirname, "../View/login.html"));
+    });
+
+    // login route 
+    app.get("/home", function(req, res) {
         res.sendFile(path.join(__dirname, "../View/home.html"));
     });
 
@@ -21,7 +26,7 @@ module.exports = function(app) {
 
     // catch all sends back to home
     app.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname, "../View/home.html"));
+    res.sendFile(path.join(__dirname, "../View/login.html"));
     });
 
 };

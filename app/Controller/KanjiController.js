@@ -7,7 +7,8 @@ var kanji = require("../Model/kanji"); // use this to do stuff on db
 
 module.exports = function(app) {
 
-    // this is the method to create all the kanji in the DB initally. 
+    // this is the method to create all the kanji in the DB initally.
+    // can probably optimize this a bit better but it works for now. -- need to insert null for undefined properties in kanji object. ]
     app.post("/db/intitKanjiAdd", function(req, res){
         let kanjiInfo = req.body.kanji
         if (kanjiInfo.length > 0){
