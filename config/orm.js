@@ -128,6 +128,8 @@ function objToSql(ob) {
     }
 
     //can add more sql statements here based on my needs. 
+
+    // or maybe use a orm npm but i dont think i need anyhting more complicated thatn this. 
   };
   
   // Export the orm object for the model (cat.js).

@@ -6,8 +6,10 @@ var orm = require("../../config/orm");
 
 var auth = {
     selectWhere: function(cols, vals, cb){
-        orm.selectWhere("kanji", cols, vals, function(res){
+        orm.selectWhere("users", cols, vals, function(res){
             cb(res);
         });
     }
 }
+
+module.exports = auth;
