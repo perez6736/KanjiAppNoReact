@@ -7,19 +7,19 @@ var auth = require("../Model/auth"); // use this to do stuff on db
 
 module.exports = function(app) {
     app.post("/auth", function(req, res){
-    var username = req.body.username;
-	var password = req.body.password;
-	if (username && password) {
-		// check db if username and pw exist  by calling doing a select on the users table
-		auth.selectWhere(
-			["username", "userPassword"], 
-			[username, password],
-			function(res){
-				console.log(res);
-			}
-		)
-	}
-
+		var username = req.body.username;
+		var password = req.body.password;
+		if (username && password) {
+			// check db if username and pw exist  by calling doing a select on the users table
+			auth.selectWhere(
+				["username", "userPassword"], 
+				[username, password],
+				function(res){
+					console.log(res);
+					return res;
+				}
+			)
+		}
     });
 
 }
