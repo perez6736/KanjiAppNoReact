@@ -118,7 +118,8 @@ function sendKanjiArray(arr){
 }
 
 // if kanji is missing from our dictionary we want to add it. 
-// initially we will use this to add all the kanji to the database. 
+// initially we will use this to add all the kanji to the database.
+// update -- using this funtion didnt let us add 2200 kanji to dictionary. 
 function addKanjitoDB(kanjiDataObject){
 	$.post("/db/intitKanjiAdd", kanjiDataObject, function(data){
 		console.log("posted kanji to dicitonary")
@@ -127,7 +128,7 @@ function addKanjitoDB(kanjiDataObject){
 
 // we just want to send one kanji and add it to DB
 function addOneKanjitoDB(){
-
+	//incomplete
 }
 
 // we will want to see all kanji information eventually 

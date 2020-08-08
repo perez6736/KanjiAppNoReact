@@ -1,22 +1,24 @@
 // dependencies ===================================================== 
 
 var auth = require("../Model/auth"); // use this to do stuff on db
+var session = require('express-session');
 
 // ==========================================================
 // do stuff with data  from data base. 
 
 module.exports = function(app) {
-    app.post("/auth", function(req, res){
+    app.post("/login/auth", function(req, res){
 		var username = req.body.username;
 		var password = req.body.password;
 		if (username && password) {
 			// check db if username and pw exist  by calling doing a select on the users table
-			auth.selectWhere(
+			auth.selectWhereAND(
 				["username", "userPassword"], 
 				[username, password],
-				function(res){
-					console.log(res);
-					return res;
+				function(results){
+					console.log(results);
+					res.send(results)
+					return results;
 				}
 			)
 		}

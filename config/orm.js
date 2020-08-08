@@ -58,9 +58,31 @@ function objToSql(ob) {
     selectWhere: function(tableInput, col, value, cb) {
       var queryString = "SELECT * FROM " + tableInput;;
       
-      queryString += "WHERE " + col;
+      queryString += " WHERE " + col;
       queryString += " = " + value;
 
+      connection.query(queryString, function(err, result) {
+        if (err) {
+          throw err;
+        }
+        cb(result);
+      });
+    },
+
+    selectWhereAND: function(tableInput, col, value, cb){
+      // examplle of cols and val BELOW 
+      // ["username", "userPassword"], col 
+      //	[username, password], val 
+      var queryString = "SELECT * FROM " + tableInput;;
+      
+      queryString += " WHERE " + col[0];
+      queryString += " = " + "'" + value[0] + "'";
+
+      for(i=1; i<col.length; i++){
+        queryString += " AND " + col[1];;
+        queryString += " = " + "'" + value[1] + "'";
+      }
+      console.log(queryString)
       connection.query(queryString, function(err, result) {
         if (err) {
           throw err;
@@ -132,5 +154,5 @@ function objToSql(ob) {
     // or maybe use a orm npm but i dont think i need anyhting more complicated thatn this. 
   };
   
-  // Export the orm object for the model (cat.js).
+  // Export the orm object for the model
   module.exports = orm;
