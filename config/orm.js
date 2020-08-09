@@ -82,7 +82,7 @@ function objToSql(ob) {
         queryString += " AND " + col[1];;
         queryString += " = " + "'" + value[1] + "'";
       }
-      console.log(queryString)
+      //console.log(queryString)
       connection.query(queryString, function(err, result) {
         if (err) {
           throw err;
@@ -102,7 +102,7 @@ function objToSql(ob) {
       queryString += printQuestionMarks(vals.length);
       queryString += ") ";
   
-      console.log(queryString);
+      //console.log(queryString);
   
       connection.query(queryString, vals, function(err, result) {
         if (err) {
@@ -124,7 +124,7 @@ function objToSql(ob) {
       queryString += " WHERE ";
       queryString += condition;
   
-      console.log(queryString);
+      //console.log(queryString);
       connection.query(queryString, function(err, result) {
         if (err) {
           throw err;

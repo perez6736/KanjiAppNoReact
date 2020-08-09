@@ -1,18 +1,22 @@
+
 // parameter = object of username and password
 function login (loginData){
 	$.post("/login/auth", loginData, function(data){
-        console.log("login activted.");
         console.log(data);
+        if(data){ //response will be true if login is successful.
+            console.log(window.location.href)
+            window.location.href = '/home'
+        }
 	})
 }
 
 
+//EVENT HANDLER METHODS ---------------------
 
 function loginButtonEventHandler (){
     event.preventDefault();
     let username = $("#username").val();
     let password = $("#password").val();
-    console.log(username, password);
     login({username: username, password: password}); //pass in as object to send to server. 
 }
 

@@ -23,7 +23,8 @@ csv flag will be set to 0 (0 means not uploaded to csv)
 https://codeshack.io/basic-login-system-nodejs-express-mysql/
 
 -- next step to do 
---- redirect users who are not logged in to login page. 
+--- redirect users that are not logged in to login page from home page.
+--- redirect users that ARE logged in to home page if they go to login page. 
 --- registration for new users. 
     - need to encrypt passwords for users. 
     - confirmation email should be used as well. 
