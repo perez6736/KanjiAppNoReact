@@ -11,6 +11,7 @@ module.exports = function(app) {
 
     // login route 
     app.get("/home", function(req, res) {
+        // To-Do - redirect if user is not logged in. 
         res.sendFile(path.join(__dirname, "../View/home.html"));
     });
 

@@ -5,10 +5,6 @@ The kanji will be added to kanji db
 link to kanji and user will be made to kanji users table 
 csv flag will be set to 0 (0 means not uploaded to csv) 
 
-Create a login page - 
-
-Username and pw field 
-sign in button and register button 
 
 - suport logging in with gmail or fb - in the future 
 
@@ -18,8 +14,18 @@ sign in button and register button
 
 
 -- thoughts and things learnt 
---- model files are typically used per controller or business need. so i have a need to auth users...
+--- model files are typically used per controller or business need.
 --- any db interaction i need for that will go into models wehre i can use it later. 
+--- sanatizing SQL input is important. need to learn a better solution but I did works for now/
+
 
 
 https://codeshack.io/basic-login-system-nodejs-express-mysql/
+
+-- next step to do 
+--- redirect users who are not logged in to login page. 
+--- registration for new users. 
+    - need to encrypt passwords for users. 
+    - confirmation email should be used as well. 
+--- fix current bug with kanji update 
+--- refactor the frontjs.js page.. its a damn shame at the moment.. 
