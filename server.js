@@ -30,5 +30,5 @@ require("./app/Controller/AuthController.js")(app);
 // Listner 
 
 app.listen(PORT, function() {
-    console.log("App listening on PORT: " + PORT);
+    console.log("App is listening on PORT: " + PORT);
   });

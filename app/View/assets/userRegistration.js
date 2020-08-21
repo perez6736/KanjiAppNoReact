@@ -1,6 +1,5 @@
-
 // parameter = object of username and password
-function login (loginData){
+function registerUser (loginData){
 	$.post("/login/auth", loginData, function(response){
         console.log(response);
         if(response){ //response will be true if login is successful.
@@ -13,13 +12,14 @@ function login (loginData){
 
 //EVENT HANDLER METHODS ---------------------
 
-function loginButtonEventHandler (){
+function registrationButtonEventHandler (){
     event.preventDefault();
     let username = $("#username").val();
     let password = $("#password").val();
-    login({username: username, password: password}); //pass in as object to send to server. 
+    let email = $("#email").val();
+    login({username: username, password: password, email: email}); //pass in as object to send to server. 
 }
 
 
 //button click handler. 
-$(document).on("click", "#submit-login-button", loginButtonEventHandler);
+$(document).on("click", "#submit-user-registration", registrationButtonEventHandler);
