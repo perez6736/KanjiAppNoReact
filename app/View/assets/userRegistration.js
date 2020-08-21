@@ -1,3 +1,12 @@
+function confirmPasswordsMatch (pw1, pw2){
+    if(pw1 === pw2){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+
 // parameter = object of username and password
 function registerUser (loginData){
 	$.post("/login/register", loginData, function(response){
@@ -17,7 +26,11 @@ function registrationButtonEventHandler (){
     let username = $("#username").val();
     let password = $("#password").val();
     let email = $("#email").val();
-    login({username: username, password: password, email: email}); //pass in as object to send to server. 
+    if(confirmPasswordsMatch){
+        registerUser({username: username, password: password, email: email}); //pass in as object to send to server. 
+    }else{
+        // show an error. 
+    }
 }
 
 

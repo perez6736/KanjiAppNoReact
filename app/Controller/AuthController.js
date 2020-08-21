@@ -30,7 +30,8 @@ const loginController = {
 	},
 
 	registerUser: function (req, res){
-		res.send("the user would be registered iff this worked. ")
+		res.send("the user would be registered iff this worked. ");
+		
 	}
 
 }
