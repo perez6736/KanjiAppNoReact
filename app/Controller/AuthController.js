@@ -31,7 +31,11 @@ const loginController = {
 
 	registerUser: function (req, res){
 		res.send("the user would be registered iff this worked. ");
-		
+		// check if email exists 
+
+		//create users -- 
+		// - encrypt password 
+		// - then insert data to db. 
 	}
 
 }
