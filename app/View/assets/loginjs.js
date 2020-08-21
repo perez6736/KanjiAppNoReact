@@ -1,9 +1,9 @@
 
 // parameter = object of username and password
 function login (loginData){
-	$.post("/login/auth", loginData, function(response){
+	$.post("/login/login", loginData, function(response){
         console.log(response);
-        if(response){ //response will be true if login is successful.
+        if(response === true){ //response will be true if login is successful.
             console.log(window.location.href)
             window.location.href = '/home'
         }

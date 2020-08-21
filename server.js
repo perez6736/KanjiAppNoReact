@@ -24,8 +24,8 @@ app.use(express.static(__dirname + '/app/View'));
 //Router
 require("./app/routing/waniAPI")(app);
 require("./app/routing/htmlRoute")(app);
-require("./app/Controller/KanjiController.js")(app);
-require("./app/Controller/AuthController.js")(app);
+require("./app/routing/kanjiRoute")(app);
+require("./app/routing/userRoute")(app);
 
 // Listner 
 

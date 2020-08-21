@@ -6,8 +6,8 @@ var path = require("path");
 // ==========================================================
 // do stuff with data  from data base. 
 
-module.exports = function(app) {
-    app.post("/login/auth", function(req, res){
+const loginController = {
+	login: function (req, res){
 		var username = req.body.username;
 		var password = req.body.password;
 		if (username && password) {
@@ -27,8 +27,16 @@ module.exports = function(app) {
 			res.send('Please enter Username and Password!');
 			res.end();
 		}
-    });
+	},
+
+	registerUser: function (req, res){
+		res.send("the user would be registered iff this worked. ")
+	}
+
 }
+
+module.exports = loginController;
+
 
 // 	if (username && password) {
 //         // check db if username and pw exist 

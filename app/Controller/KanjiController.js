@@ -2,15 +2,13 @@
 
 var kanji = require("../Model/kanji"); // use this to do stuff on db
 
-// Routes ==========================================================
-// this file will manipulate the data from the database... and should respond to the view where we can use it . 
+//Controller ==========================================================
+// this should be a object of functions that grab raw data from db and manipulate into useable stuff. 
+// can also be functions that takes data and formats it to put into database. 
 
-module.exports = function(app) {
-
-    // this is the method to create all the kanji in the DB initally.
-    // can probably optimize this a bit better but it works for now. -- need to insert null for undefined properties in kanji object. ]
-    app.post("/db/intitKanjiAdd", function(req, res){
-        let kanjiInfo = req.body.kanji
+const KanjiController = {
+    addKanji: function (input, ouput){
+        let kanjiInfo = input.body.kanji
         if (kanjiInfo.length > 0){
             for (i=0; i<kanjiInfo.length; i++){
                 if(kanjiInfo[i].on_readings == undefined && kanjiInfo[i].kun_readings == undefined){
@@ -23,6 +21,7 @@ module.exports = function(app) {
                         ],
                         function(){
                             console.log("done case 1");
+                            return "done case 1"
                         }
                     );
                 }
@@ -37,6 +36,7 @@ module.exports = function(app) {
                         ],
                         function(){
                             console.log("done case 2");
+                            return "done case 2"
                         }
                     );
                 }
@@ -50,7 +50,8 @@ module.exports = function(app) {
                             kanjiInfo[i].kanji, kanjiInfo[i].grade, kanjiInfo[i].jlpt, kanjiInfo[i].stroke_count, kanjiInfo[i].heisig_en, kanjiInfo[i].on_readings[0], kanjiInfo[i].unicode
                         ],
                         function(){
-                            console.log("done case 2");
+                            console.log("done case 3");
+                            return "done case 3"
                         }
                     );
                 }
@@ -64,27 +65,32 @@ module.exports = function(app) {
                             kanjiInfo[i].kanji, kanjiInfo[i].grade, kanjiInfo[i].jlpt, kanjiInfo[i].stroke_count, kanjiInfo[i].heisig_en, kanjiInfo[i].on_readings[0], kanjiInfo[i].kun_readings[0], kanjiInfo[i].unicode
                         ],
                         function(){
-                            console.log("done case 3");
+                            console.log("done case 4");
+                            return "done case 4"
                         }
                     );
                 }
     
             }
         }
-        
-    });
+    },
 
-    // delete kanji ? - do i need this? 
-    app.put("/db/kanji/:id", function(req, res) {
-        console.log('this will be delete?')
-    });
+    deleteKanji: function(input){
+        return input + " deleted."
+    }, 
 
+    // return a bool
+    // do a select kanji from table - if exists true else false 
+    doesKanjiExistinDB: function (kanjicharacter){
+        kanji.selectWhere("kanji", kanjicharacter, function(res){
+            console.log(res);
+            if(res.lenght > 0){
+                return true;
+            } else{
+                return false;
+            }
+        });
+    }
 }
 
-// return a bool
-// do a select kanji from table - if exists true else false 
-function doesKanjiExistinDB(kanjicharacter){
-    kanji.selectWhere("kanji", kanjicharacter, function(res){
-        console.log(res);
-    });
-}
+module.exports = KanjiController;

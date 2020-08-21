@@ -1,6 +1,6 @@
 // parameter = object of username and password
 function registerUser (loginData){
-	$.post("/login/auth", loginData, function(response){
+	$.post("/login/register", loginData, function(response){
         console.log(response);
         if(response){ //response will be true if login is successful.
             console.log(window.location.href)
