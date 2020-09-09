@@ -1,6 +1,6 @@
-const path = require("path");
 const user = require("../Controller/AuthController");
 
+// frontend calls are coming here. 
 module.exports = function(app) {
 
     // login route 

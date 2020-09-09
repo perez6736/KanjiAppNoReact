@@ -12,12 +12,14 @@ const loginController = {
 		var password = req.body.password;
 		if (username && password) {
 			// check db if username and pw exist  by calling doing a select on the users table
+			// eventually i will need to encyrypt and compare.
 			auth.selectWhereAND(["username", "userPassword"], [username, password], function(results){
 				if(results.length > 0){ // if we get a result user exists in db. 
 					console.log(results);
 					req.session.loggedin = true;
 					req.session.username = username;
 					res.send(true);
+					// eventually i will need to encyrypt and compare. 
 				} else {
 					res.send("Incorrect Username and/or Password!")
 				}
@@ -32,6 +34,8 @@ const loginController = {
 	registerUser: function (req, res){
 		res.send("the user would be registered iff this worked. ");
 		// check if email exists 
+		// if users email exist do not register user 
+		// if username exists tell them to pick another one. 
 
 		//create users -- 
 		// - encrypt password 

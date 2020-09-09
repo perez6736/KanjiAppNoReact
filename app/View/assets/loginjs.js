@@ -2,10 +2,13 @@
 // parameter = object of username and password
 function login (loginData){
 	$.post("/login/login", loginData, function(response){
+        $("#login-error").hide();
         console.log(response);
         if(response === true){ //response will be true if login is successful.
             console.log(window.location.href)
             window.location.href = '/home'
+        }else{
+            $("#login-error").show();
         }
 	})
 }
