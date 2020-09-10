@@ -13,6 +13,7 @@
 #header-sign-out{
     width: auto;
     float:right;
+    cursor: pointer; 
 
 }
 

@@ -28,7 +28,7 @@ module.exports = function(app) {
 
     // login route 
     app.get("/login", function(req, res) {
-        console.log(req.session.loggedin)
+        //console.log(req.session.loggedin)
         // check if user is logged in. - if yes go to home page else go to login page. 
         if (req.session.loggedin === true){
             res.sendFile(path.join(__dirname, "../View/home.html"));

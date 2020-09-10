@@ -10,7 +10,12 @@ module.exports = function(app) {
 
     // register route 
     app.post("/login/register", function(req, res) {
-        user.registerUser(req,res);
+        user.registerUser(req, res);
+    });
+
+    // logout route 
+    app.post("/login/logout", function(req, res) {
+        user.logout(req, res);
     });
 
 };

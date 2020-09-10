@@ -40,6 +40,16 @@ const loginController = {
 		//create users -- 
 		// - encrypt password 
 		// - then insert data to db. 
+	},
+
+	logout: function (req, res){
+		req.session.destroy(function(err){
+			if(!err){
+				res.send(true) // send true if success
+			}else{
+				res.send(err);
+			}
+		})
 	}
 
 }
