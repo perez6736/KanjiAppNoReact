@@ -15,6 +15,12 @@ var auth = {
         orm.selectWhereAND("users", cols, vals, function(res){
             cb(res);
         });
+    },
+
+    selectWhereOR: function(cols, vals, cb){
+        orm.selectWhereOR("users", cols, vals, function(res){
+            cb(res);
+        })
     }
 }
 

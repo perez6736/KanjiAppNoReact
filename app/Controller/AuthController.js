@@ -1,3 +1,6 @@
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 // dependencies ===================================================== 
 
 var auth = require("../Model/auth"); // use this to do stuff on db
@@ -32,14 +35,24 @@ const loginController = {
 	},
 
 	registerUser: function (req, res){
-		res.send("the user would be registered iff this worked. ");
-		// check if email exists 
-		// if users email exist do not register user 
-		// if username exists tell them to pick another one. 
-
-		//create users -- 
-		// - encrypt password 
-		// - then insert data to db. 
+		var username = req.body.username;
+		var email = req.body.email;
+		var password = req.body.password;
+		auth.selectWhereOR(["username", "email"], [username, email], function(results){
+			if(results.length > 0){
+				//we got a user... dont register. 
+				res.send("User already exists.")
+			}
+			else{
+				// - then insert data to db. 
+				bcrypt.genSalt(saltRounds, function(err, salt){
+					bcrypt.hash(password, salt, function(err, hash){
+						console.log(hash);
+						res.send(hash);
+					})
+				})
+			}
+		})
 	},
 
 	logout: function (req, res){
@@ -55,21 +68,3 @@ const loginController = {
 }
 
 module.exports = loginController;
-
-
-// 	if (username && password) {
-//         // check db if username and pw exist 
-// 		connection.query('SELECT * FROM user WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
-// 			if (results.length > 0) {
-// 				req.session.loggedin = true;
-// 				req.session.username = username;
-// 				res.redirect('/home');
-// 			} else {
-// 				res.send('Incorrect Username and/or Password!');
-// 			}			
-// 			res.end();
-// 		});
-// } else {
-// 	res.send('Please enter Username and Password!');
-// 	res.end();
-// }

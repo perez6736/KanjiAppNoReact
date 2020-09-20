@@ -91,6 +91,28 @@ function objToSql(ob) {
       });
     },
 
+    selectWhereOR: function(tableInput, col, value, cb){
+      // examplle of cols and val BELOW 
+      // ["username", "userPassword"], col 
+      //	[username, password], val 
+      var queryString = "SELECT * FROM " + tableInput;;
+      
+      queryString += " WHERE " + col[0];
+      queryString += " = " + "'" + value[0] + "'";
+
+      for(i=1; i<col.length; i++){
+        queryString += " OR " + col[1];;
+        queryString += " = " + "'" + value[1] + "'";
+      }
+      //console.log(queryString)
+      connection.query(queryString, function(err, result) {
+        if (err) {
+          throw err;
+        }
+        cb(result);
+      });
+    },
+
     create: function(table, cols, vals, cb) {
         //INSERT 
       var queryString = "INSERT INTO " + table;

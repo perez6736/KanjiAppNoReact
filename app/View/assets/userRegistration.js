@@ -13,7 +13,7 @@ function registerUser (loginData){
         console.log(response);
         if(response){ //response will be true if login is successful.
             console.log(window.location.href)
-            window.location.href = '/home'
+            //window.location.href = '/home'
         }
 	})
 }
