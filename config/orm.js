@@ -56,11 +56,10 @@ function objToSql(ob) {
     },
 
     selectWhere: function(tableInput, col, value, cb) {
-      var queryString = "SELECT * FROM " + tableInput;;
+      var queryString = "SELECT * FROM " + tableInput;
       
       queryString += " WHERE " + col;
-      queryString += " = " + value;
-
+      queryString += " = '" + value + "'";
       connection.query(queryString, function(err, result) {
         if (err) {
           throw err;

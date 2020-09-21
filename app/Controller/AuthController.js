@@ -13,23 +13,26 @@ const loginController = {
 	login: function (req, res){
 		var username = req.body.username;
 		var password = req.body.password;
+		var errorMsg = "Incorrect Username and/or Password!"
 		if (username && password) {
-			// check db if username and pw exist  by calling doing a select on the users table
-			// eventually i will need to encyrypt and compare.
-			auth.selectWhereAND(["username", "userPassword"], [username, password], function(results){
-				if(results.length > 0){ // if we get a result user exists in db. 
-					console.log(results);
-					req.session.loggedin = true;
-					req.session.username = username;
-					res.send(true);
-					// eventually i will need to encyrypt and compare. 
-				} else {
-					res.send("Incorrect Username and/or Password!")
+			auth.selectWhere("username", [username], function(results){
+				if(results.length>0){ // if username exists - check pw 
+					bcrypt.compare(password, results[0].userPassword, function(err, compareResult) {
+						if(compareResult){
+							req.session.loggedin = true;
+							req.session.username = username;
+							res.send(true);
+						}
+						else{ //if pw is incorrect send error 
+							res.send(errorMsg);
+						}
+					});
+				} else { // if no users exist - send error 
+					res.send(errorMsg)
 				}
-				res.end();
-			});
-		}else {
-			res.send('Please enter Username and Password!');
+			})
+		}else { // if username and pw sent is null 
+			res.send(errorMsg);
 			res.end();
 		}
 	},
@@ -48,10 +51,17 @@ const loginController = {
 				bcrypt.genSalt(saltRounds, function(err, salt){
 					bcrypt.hash(password, salt, function(err, hash){
 						console.log(hash);
-						res.send(hash);
+						// insert to database 
+						auth.createUser(["username","userPassword","email"],[username, hash, email], function(results){
+							// login the user. 
+							req.session.loggedin = true;
+							req.session.username = username;
+							res.send(results);
+						})
 					})
 				})
 			}
+			res.end();
 		})
 	},
 
@@ -62,6 +72,7 @@ const loginController = {
 			}else{
 				res.send(err);
 			}
+			res.end();
 		})
 	}
 

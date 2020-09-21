@@ -21,6 +21,12 @@ var auth = {
         orm.selectWhereOR("users", cols, vals, function(res){
             cb(res);
         })
+    },
+
+    createUser: function(cols, vals, cb){
+        orm.create("users", cols, vals, function(res){
+            cb(res);
+        })
     }
 }
 

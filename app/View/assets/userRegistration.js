@@ -13,7 +13,7 @@ function registerUser (loginData){
         console.log(response);
         if(response){ //response will be true if login is successful.
             console.log(window.location.href)
-            //window.location.href = '/home'
+            window.location.href = '/home'
         }
 	})
 }
@@ -23,10 +23,11 @@ function registerUser (loginData){
 
 function registrationButtonEventHandler (){
     event.preventDefault();
+    // add validation.  
     let username = $("#username").val();
     let password = $("#password").val();
     let email = $("#email").val();
-    if(confirmPasswordsMatch){
+    if(confirmPasswordsMatch && username != null && password != null){
         registerUser({username: username, password: password, email: email}); //pass in as object to send to server. 
     }else{
         // show an error. 
