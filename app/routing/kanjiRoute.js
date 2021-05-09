@@ -1,5 +1,5 @@
 var path = require("path");
-const kanji = require("../Controller/KanjiController");
+const kanji = require("../controller/kanjiController");
 
 module.exports = function(app) {
 

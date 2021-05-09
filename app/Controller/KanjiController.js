@@ -1,6 +1,6 @@
 // dependencies ===================================================== 
 
-var kanji = require("../Model/kanji"); // use this to do stuff on db
+var kanji = require("../model/kanji"); // use this to do stuff on db
 
 //Controller ==========================================================
 // this should be a object of functions that grab raw data from db and manipulate into useable stuff. 

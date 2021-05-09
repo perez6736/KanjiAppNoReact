@@ -1,7 +1,6 @@
 What do i want to do that might need a DB?? 
 - I want to eventually support users and have them search there most frequent Kanjis. 
-- I want to Store all the kanjis with their meaning, JLPT level, Readings** and jyoyo grade 
-- I want to show be able to show the user a history of all the kanji thhey have ran into 
+- I want to be able to show the user a history of all the kanji they have ran into 
 
 Tables I might need in order to do this. 
 
@@ -13,19 +12,9 @@ Users Table
 - last name 
 - email 
 
-Kanji Table 
-- ID 
-- Kanji 
-- grade
-- english
-- kunReading 
-- onReading
-- JLPTlevel 
-- unicode  
-
-UsersKanji Table 
+UsersKanji Table - will store the kanji the user has seen. 
 - ID
-- KanjiID - foreign key 
-- Kanji (maybe)
+- Kanji
 - UserID - foreign key 
 
+Kanji table is being replaced with xml file with over 6000 kanji characters with tons of info on that kanji. 

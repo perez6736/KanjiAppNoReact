@@ -1,32 +1,15 @@
-when i enter japanese text what happens. 
+First thing to do. 
+read directly from xml ( maybe easier. )
 
-The kanji will be added to kanji db 
-- I need to support users for these to functionalities - 
-link to kanji and user will be made to kanji users table 
-csv flag will be set to 0 (0 means not uploaded to csv) 
+write a get request to get info on a kanji 
+write a get request to get info on a list of kanji 
+write a get request to get info on all kanji 
+write a get request to get info based on the english of a kanji
 
+write a put request to add new kanji into the db 
+make sure you cant put if fields are missing 
 
-- suport logging in with gmail or fb - in the future 
-
-- create a registration page 
--- needs username / pw  and email field 
--- when user submits data need to encode the pw and store encoding into db 
-
-
--- thoughts and things learnt 
---- model files are typically used per controller or business need.
---- any db interaction i need for that will go into models wehre i can use it later. 
---- sanatizing SQL input is important. need to learn a better solution but I did works for now/
+write a delete request to remove kanji into the db (bonus only be able to delete added kanji)
+this is a bonus and may not need but will be maybe useful idk. 
 
 
-
-https://codeshack.io/basic-login-system-nodejs-express-mysql/
-
--- next step to do 
---- redirect users that are not logged in to login page from home page.
---- redirect users that ARE logged in to home page if they go to login page. 
---- registration for new users. 
-    - need to encrypt passwords for users. 
-    - confirmation email should be used as well. 
---- fix current bug with kanji update 
---- refactor the frontjs.js page.. its a damn shame at the moment.. 

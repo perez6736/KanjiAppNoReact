@@ -3,7 +3,7 @@ const saltRounds = 10;
 
 // dependencies ===================================================== 
 
-var auth = require("../Model/auth"); // use this to do stuff on db
+var auth = require("../model/auth"); // use this to do stuff on db
 var path = require("path");
 
 // ==========================================================

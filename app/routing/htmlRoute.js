@@ -8,9 +8,9 @@ module.exports = function(app) {
     app.get("/", function(req, res) {
         console.log(req.session)
         if (req.session.loggedin === true){
-            res.sendFile(path.join(__dirname, "../View/home.html"));
+            res.sendFile(path.join(__dirname, "../view/home.html"));
         }else {
-            res.sendFile(path.join(__dirname, "../View/login.html"));
+            res.sendFile(path.join(__dirname, "../view/login.html"));
         }
     });
 
@@ -19,9 +19,9 @@ module.exports = function(app) {
         // To-Do - redirect if user is not logged in. 
         console.log(req.session)
         if(req.session.loggedin != true){
-            res.sendFile(path.join(__dirname, "../View/login.html"));
+            res.sendFile(path.join(__dirname, "../view/login.html"));
         }else{
-            res.sendFile(path.join(__dirname, "../View/home.html"));
+            res.sendFile(path.join(__dirname, "../view/home.html"));
         }
 
     });
@@ -31,21 +31,21 @@ module.exports = function(app) {
         //console.log(req.session.loggedin)
         // check if user is logged in. - if yes go to home page else go to login page. 
         if (req.session.loggedin === true){
-            res.sendFile(path.join(__dirname, "../View/home.html"));
+            res.sendFile(path.join(__dirname, "../view/home.html"));
         }else {
-            res.sendFile(path.join(__dirname, "../View/login.html"));
+            res.sendFile(path.join(__dirname, "../view/login.html"));
         }
 
     });
 
     // UserRegisterFrom route 
     app.get("/registeruser", function(req, res) {
-        res.sendFile(path.join(__dirname, "../View/UserRegisterFrom.html"));
+        res.sendFile(path.join(__dirname, "../view/userRegisterFrom.html"));
     });
 
     // catch all sends back to home
     app.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname, "../View/login.html"));
+    res.sendFile(path.join(__dirname, "../view/login.html"));
     });
 
 };

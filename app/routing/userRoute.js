@@ -1,4 +1,4 @@
-const user = require("../Controller/AuthController");
+const user = require("../controller/authController");
 
 // frontend calls are coming here. 
 module.exports = function(app) {
