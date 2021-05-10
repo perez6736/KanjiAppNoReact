@@ -1,5 +1,5 @@
 const request = require('request');
-const xmlHelper = require()
+const xmlHelper = require('../kanjiXmlHelper/kanjiXmlHelper.js');
 //
 //https://kanjiapi.dev/kanji/[kanji]
 //
@@ -31,7 +31,7 @@ module.exports = function(app) {
         console.log(req.query.kanji)
 
         // need a function to grab the kanji info from the xml file. 
-        res.json(xmlHelper.getKanjis(requestedKanjis))
+        res.json(xmlHelper.getKanjiInfo(requestedKanjis))
     })
 }
 

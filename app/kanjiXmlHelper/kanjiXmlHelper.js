@@ -27,15 +27,15 @@ const kanjiXml = {
         XMLtoJSON.then((result) => {
             for(let i = 0; i<result.character.length; i++){
                 if(result.character[i].literal[0] === kanji){
-                    console.log(result.character[i]);
-                    break
+                    return(result.character[i]);
                 }
+                else return "no kanji was found."
             }
         })
     },
 
     // create function to get info on multiple kanji 
-    getKanjisInfo(kanjis){
+    getKanjisInfo(kanjis){ // an array of kanji
         XMLtoJSON.then((results) => {
 
         })
