@@ -11,7 +11,7 @@ const XMLtoJSON = new Promise((resolve, reject) => {
     fs.readFile(filePath, 'utf8', function(err, xml) {
         if (err) reject(err);
         parseString(xml, function (err, result) {
-            if (err) console.log(err);
+            if (err) reject(err);
             let kanjidic = result.kanjidic2;
             resolve(kanjidic)
         });
@@ -22,22 +22,35 @@ const XMLtoJSON = new Promise((resolve, reject) => {
 
 const kanjiXml = {
 
-    // create function to get info on single kanji
-    getKanjiInfo(kanji){
-        XMLtoJSON.then((result) => {
-            for(let i = 0; i<result.character.length; i++){
-                if(result.character[i].literal[0] === kanji){
-                    return(result.character[i]);
+    // function to get info on single kanji
+    getKanjiInfo: (kanji) => {
+        return new Promise((resolve, reject) => {
+            XMLtoJSON.then((results) => {
+                for(let i = 0; i<results.character.length; i++){
+                    if(results.character[i].literal[0] === kanji){
+                        return resolve(results.character[i]);
+                    }
                 }
-                else return "no kanji was found."
-            }
+                reject("no kanji was found.")
+            })
         })
     },
 
     // create function to get info on multiple kanji 
-    getKanjisInfo(kanjis){ // an array of kanji
-        XMLtoJSON.then((results) => {
-
+    getKanjisInfo: (kanjis) => {
+        return new Promise((resolve) => {
+            XMLtoJSON.then((results) => {
+                let kanjisInfo = []
+                kanjis.forEach(kanji => {
+                    for(let i = 0; i<results.character.length; i++){
+                        if(results.character[i].literal[0] === kanji){
+                            //console.log(results.character[i])
+                            kanjisInfo.push(results.character[i]);
+                        }
+                    }
+                });
+                resolve({kanjisInfo})
+            })
         })
     },
 
