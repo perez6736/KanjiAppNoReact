@@ -18,10 +18,10 @@ module.exports = function(app) {
     app.get("/home", function(req, res) {
         // To-Do - redirect if user is not logged in. 
         console.log(req.session)
-        if(req.session.loggedin != true){
-            res.sendFile(path.join(__dirname, "../view/login.html"));
-        }else{
+        if(req.session.loggedin === true){
             res.sendFile(path.join(__dirname, "../view/home.html"));
+        }else{
+            res.sendFile(path.join(__dirname, "../view/login.html"));
         }
 
     });

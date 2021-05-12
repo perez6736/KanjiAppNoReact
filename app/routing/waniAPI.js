@@ -10,7 +10,7 @@ const xmlHelper = require('../kanjiXmlHelper/kanjiXmlHelper.js');
 module.exports = function(app) {
     //anyhting related to frontend and back end comms goes in here. 
 
-    // revieces an array of kanji 
+    // revieces an array of kanji from thrid party api.
     app.get("/api/kanji", function(req, res){
         let KanjiParam = req.query.kanji;
         console.log(req.query.kanji)
@@ -27,11 +27,26 @@ module.exports = function(app) {
     });
 
     app.get("/xml/kanji", function(req, res){
-        let requestedKanjis = req.query.kanji;
-        console.log(req.query.kanji)
+        let requestedKanjis = req.query.kanji[0];
+        console.log(requestedKanjis)
 
-        // need a function to grab the kanji info from the xml file. 
-        res.json(xmlHelper.getKanjiInfo(requestedKanjis))
+        xmlHelper.getKanjiInfo(requestedKanjis).then((results) => {
+            res.json(results);
+        }).catch((err) => {
+            res.json(err);
+        })
+    });
+
+    app.get("/xml/kanjis", function(req, res){
+        let requestedKanjis = req.query.kanji;
+        console.log("this is kanjis")
+        console.log(requestedKanjis)
+
+        xmlHelper.getKanjisInfo(requestedKanjis).then((results) => {
+            res.json(results);
+        }).catch((err) => {
+            res.json(err);
+        })
     })
 }
 
