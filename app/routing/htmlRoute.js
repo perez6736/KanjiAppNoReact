@@ -6,23 +6,22 @@ module.exports = function(app) {
   
     // home route 
     app.get("/", function(req, res) {
-        console.log(req.session)
-        if (req.session.loggedin === true){
-            res.sendFile(path.join(__dirname, "../view/home.html"));
-        }else {
-            res.sendFile(path.join(__dirname, "../view/login.html"));
-        }
+        res.sendFile(path.join(__dirname, "../view/home.html"));
+        // if (req.session.loggedin === true){
+        //     res.sendFile(path.join(__dirname, "../view/home.html"));
+        // }else {
+        //     res.sendFile(path.join(__dirname, "../view/login.html"));
+        // }
     });
 
     // login route 
     app.get("/home", function(req, res) {
-        // To-Do - redirect if user is not logged in. 
-        console.log(req.session)
-        if(req.session.loggedin === true){
-            res.sendFile(path.join(__dirname, "../view/home.html"));
-        }else{
-            res.sendFile(path.join(__dirname, "../view/login.html"));
-        }
+        res.sendFile(path.join(__dirname, "../view/home.html"));
+        // if(req.session.loggedin === true){
+        //     res.sendFile(path.join(__dirname, "../view/home.html"));
+        // }else{
+        //     res.sendFile(path.join(__dirname, "../view/login.html"));
+        // }
 
     });
 
