@@ -68,6 +68,20 @@ const kanjiXml = {
         })
     },
 
+    // create function to get kanjis with certain grade 
+    getKanjiAllJoyoKanji(){
+        XMLtoJSON.then((results) => {
+
+        })
+    },
+
+    // create function to get kanjis with certain jlpt 
+    getKanjiAllJlptKanji(jlptLevel){
+        XMLtoJSON.then((results) => {
+
+        })
+    },
+
     // create function to get kanji based on english word - heisig word or meaning. 
     getKanjiFromHeisigKeyword(heisigWord){
         XMLtoJSON.then((results) => {
