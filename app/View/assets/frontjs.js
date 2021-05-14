@@ -1,9 +1,7 @@
-var kanjiCountMap;
-var KanjisInfo;
 // this function is the only place this global variable gets written over. 
 function createKanjiCouintMap(arr){
 	//count dups in array 
-	kanjiCountMap = arr.reduce(tallyupelements, {});
+	return arr.reduce(tallyupelements, {});
 }
 // accumalator for reduce function. 
 function tallyupelements(obj, kanji){
@@ -16,21 +14,33 @@ function tallyupelements(obj, kanji){
 
 // helper functions
 
-function SortKanjiArrByCount(arr){
+function SortKanjiByJLPT(){
+	let elements = $(".Kanji-wrapper").toArray()
 	function compare(a,b){
-		return kanjiCountMap[b.literal[0]] - kanjiCountMap[a.literal[0]]
+		return $(b).attr("data-jlpt") - $(a).attr("data-jlpt")
 	}
-	let sortarr = arr.sort(compare);
-	return sortarr;
+	let sortarr = elements.sort(compare);
+	$("#Kanji-List").empty();
+	$("#Kanji-List").append(sortarr);
+	
 }
 
-function SortKanjiByJLPT(arr){
-	console.log("create this function.")
+function SortKanjiArrByCount(){
+	let elements = $(".Kanji-wrapper").toArray()
+	function compare(a,b){
+		return $(b).attr("data-count") - $(a).attr("data-count")
+	}
+	let sortarr = elements.sort(compare);
+	$("#Kanji-List").empty();
+	$("#Kanji-List").append(sortarr);
+	
 }
 
-// needs array of kanji objects
-function SortKanjiByJLPT(arr){
-// use the data attributes 
+function addCountToResponse(arr, countMap){
+	arr.forEach(element => {
+		element.count = countMap[element.literal[0]]
+	});
+	return arr;
 }
 
 // takes an input of text and spits out an array of kanji
@@ -70,12 +80,13 @@ function removeDuplicatesFromArray(arr){
 // request related functions 
 
 // this send an array of kanji to the server. 
-function sendKanjiArray(arr, count){
+function sendKanjiArray(arr, countMap){
 	// send an array of kanji 
 	$.get("/xml/kanjis", {kanji: arr}, function(data){
-		// this gets data back from 
-		KanjisInfo = data.kanjisInfo;
-		createKanjiList(SortKanjiArrByCount(KanjisInfo), count)
+		let KanjisInfo = data.kanjisInfo;
+		let KanjisInfoWithCount = addCountToResponse(KanjisInfo, countMap)
+		createKanjiList(KanjisInfoWithCount)
+		SortKanjiArrByCount(KanjisInfoWithCount)
 		
 	})
 }
@@ -84,11 +95,13 @@ function sendKanjiArray(arr, count){
 
 // is it possible to make this cleaner? idk 
 // arrr is an arr of objects containing kanji info
-function createKanjiList(arr, count){
+function createKanjiList(arr){
 	$("#Kanji-List").empty();
 	for (i=0; i<arr.length; i++){
-		console.log(arr[i])
 		// define the divs 
+		if(arr[i].misc[0].jlpt === undefined){
+			arr[i].misc[0].jlpt = [-1]
+		}
 		let divSingleKanjiContainer = $("<div>");
 		let divKanjiInfo = $("<div>");
 		let divKanji = $("<div>");
@@ -101,8 +114,8 @@ function createKanjiList(arr, count){
 		  });
 		//give the attr
 		divSingleKanjiContainer.attr('data-Kanji', arr[i].literal[0]);
-		divSingleKanjiContainer.attr('data-Count', kanjiCountMap[arr[i].literal[0]]);
-		divSingleKanjiContainer.attr('data-JLPT', (arr[i].misc[0].jlpt === undefined) ? 'NA' : arr[i].misc[0].jlpt[0]);
+		divSingleKanjiContainer.attr('data-Count', arr[i].count);
+		divSingleKanjiContainer.attr('data-JLPT', arr[i].misc[0].jlpt[0])
 		divSingleKanjiContainer.addClass("Kanji-wrapper")
 		divKanjiInfo.addClass("Kanji-Info")
 		divKanji.addClass("Kanji");
@@ -113,8 +126,8 @@ function createKanjiList(arr, count){
 		// set text 
 		divKanji.text(arr[i].literal[0]);
 		divEN.text("English: " + arr[i].reading_meaning[0].rmgroup[0].meaning[0]);
-		divJLPT.text("JLPT N" + (arr[i].misc[0].jlpt === undefined) ? 'NA' : arr[i].misc[0].jlpt[0]);
-		divCount.text("Frequency: " + kanjiCountMap[arr[i].literal[0]]);
+		divJLPT.text((arr[i].misc[0].jlpt[0] === -1) ? 'No JLPT info' : `JLPT N${arr[i].misc[0].jlpt[0]}` );
+		divCount.text("Frequency: " + arr[i].count);
 		// append it all 
 		$("#Kanji-List").append(divSingleKanjiContainer);
 		divSingleKanjiContainer.append(divKanji);
@@ -132,39 +145,32 @@ function createKanjiList(arr, count){
 function buttonClick(){
 	event.preventDefault();
 	$("#error-text").hide();
+	$('#sortCountID').prop("checked", true);
 	let userInput = $("#kanjiInput").val().trim();
 	if(doesKanjiExistinInput(userInput)){
 		$('#SortKanjiRadio').show();
 		let Kanjiarr = createKanjiArr(userInput); // removes non kanji
 		let KanjiarrUnique = removeDuplicatesFromArray(Kanjiarr) // removes dupes
-		createKanjiCouintMap(Kanjiarr); // with the Kanjiarr I need to make a map {charcter: frequency}]
-		sendKanjiArray(KanjiarrUnique); // send to server
-
+		let countMap = createKanjiCouintMap(Kanjiarr); // keep track of frequency of kanji
+		sendKanjiArray(KanjiarrUnique, countMap); //send kanji array but count map is used in response. 
 	}
 	else{
 		$("#error-text").show();
 		console.log("no kanji in input. ");
 	}
-
 }
 
 function sortKanji(){
-	if($("#sortCountID").is(':checked')){
-		// this doesnt work a second time. 
-		createKanjiList(SortKanjiArrByCount(KanjisInfo));
+	if($("#sortCountID").prop("checked")){
+		$('#sortCountID').prop("checked", true);
+		SortKanjiArrByCount();
 	}
 	// need to create this
-	else if($("#sortJLPTID").is(':checked')){
-		createKanjiList(SortKanjiByJLPT(KanjisInfo));
+	else if($("#sortJLPTID").prop("checked")){
+		$('#sortJLPTID').prop("checked", true);
+		SortKanjiByJLPT();
 	}
 }
 
 //button click handler. 
 $(document).on("click", "#submit-kanji-button", buttonClick);
-
-// things i need to do.
-// remove the global variables. 
-// add the count to the data attributes 
-// use the data attributes to sort the list. 
-// - for frequency and jlpt
-// handle case where no jlpt level exists. 
