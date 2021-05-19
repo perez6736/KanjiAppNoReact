@@ -44,7 +44,6 @@ const kanjiXml = {
                 kanjis.forEach(kanji => {
                     for(let i = 0; i<results.character.length; i++){
                         if(results.character[i].literal[0] === kanji){
-                            //console.log(results.character[i])
                             kanjisInfo.push(results.character[i]);
                         }
                     }
@@ -58,11 +57,9 @@ const kanjiXml = {
     getKanjiWithGrade(gradeLevel){
         return new Promise((resolve) => {
             XMLtoJSON.then((results) => {
-                //return kanji with a grade level of x 
                 let kanjisInfo = []
                 for(let i = 0; i<results.character.length; i++){
                     if(results.character[i].misc[0].grade != undefined && parseInt(results.character[i].misc[0].grade[0]) === gradeLevel){
-                        console.log(results)
                         kanjisInfo.push(results.character[i]);
                     }
                 }
@@ -75,11 +72,9 @@ const kanjiXml = {
     getKanjiWithJLPTn(jlptLevel){
         return new Promise((resolve) => {
             XMLtoJSON.then((results) => {
-                //return kanji with a jlpt n x 
                 let kanjisInfo = []
                 for(let i = 0; i<results.character.length; i++){
                     if(results.character[i].misc[0].jlpt != undefined && parseInt(results.character[i].misc[0].jlpt[0]) === jlptLevel){
-                        console.log(results)
                         kanjisInfo.push(results.character[i]);
                     }
                 }
@@ -92,12 +87,9 @@ const kanjiXml = {
     getKanjiAllJoyoKanji(){
         return new Promise((resolve) => {
             XMLtoJSON.then((results) => {
-                //return kanji with a grade level of x 
-                console.log(results.character[0].misc[0].grade[0])
                 let kanjisInfo = []
                 for(let i = 0; i<results.character.length; i++){
                     if(results.character[i].misc[0].grade != undefined){
-                        console.log(results)
                         kanjisInfo.push(results.character[i]);
                     }
                 }
@@ -110,12 +102,9 @@ const kanjiXml = {
     getKanjiAllJlptKanji(){
         return new Promise((resolve) => {
             XMLtoJSON.then((results) => {
-                //return kanji with a grade level of x 
-                console.log(results.character[0].misc[0].grade[0])
                 let kanjisInfo = []
                 for(let i = 0; i<results.character.length; i++){
                     if(results.character[i].misc[0].jlpt != undefined){
-                        console.log(results)
                         kanjisInfo.push(results.character[i]);
                     }
                 }
@@ -125,12 +114,29 @@ const kanjiXml = {
     },
 
     // create function to get kanji based on english word - heisig word or meaning. 
-    getKanjiFromHeisigKeyword(heisigWord){
-
+    getKanjiFromMeaning(meaning){
+        return new Promise((resolve) => {
+            XMLtoJSON.then((results) => {
+                //return kanji with a meaning of heisigWord
+                let kanjisInfo = []
+                for(let i = 0; i<results.character.length; i++){
+                    if(results.character[i].reading_meaning != undefined && results.character[i].reading_meaning[0].rmgroup[0].meaning != undefined){
+                        for(let j = 0; j<results.character[i].reading_meaning[0].rmgroup[0].meaning.length; j++){
+                            if (results.character[i].reading_meaning[0].rmgroup[0].meaning[j] === meaning){
+                                kanjisInfo.push(results.character[i]);
+                            }
+                        }
+                    }
+                }
+                resolve({kanjisInfo})
+            })
+        })
     },
+
+
 }
 
-kanjiXml.getKanjiAllJoyoKanji()
+kanjiXml.getKanjiFromMeaning("castle")
 
 module.exports = kanjiXml;
 
