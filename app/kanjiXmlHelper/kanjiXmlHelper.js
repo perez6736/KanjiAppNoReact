@@ -69,6 +69,7 @@ const kanjiXml = {
     },
 
     // create function to get kanjis with certain jlpt 
+    // uses the pre-2010 level of the Japanese Language Proficiency Test (JLPT) in which the kanji occurs (1-4).
     getKanjiWithJLPTn(jlptLevel){
         return new Promise((resolve) => {
             XMLtoJSON.then((results) => {

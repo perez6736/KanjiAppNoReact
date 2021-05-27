@@ -7,7 +7,7 @@
     <title>KanjiApp</title>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="./assets/frontjs.js"></script>
+<script type="text/javascript" src="./assets/kanjiSearch"></script>
 <script type="text/javascript" src="./assets/logoutjs.js"></script>
 <link rel="stylesheet" href="./assets/styles.css">
 </head>
@@ -20,9 +20,9 @@
             <!--this the form to inout kanji-->
         <div id="input-container">
             <form id="kanjiInput-Form">
-                <label> Please enter Japanese Text.</label>
+                <label> Search for Kanji </label>
                 <br>
-                <textarea id="kanjiInput"></textarea>
+                <input id="kanjiInput" type="text"> Kanji </input>
                 <input id ="submit-kanji-button" type="submit"></input>
                 <p id="error-text" style="display: none;" >There was no Kanji in the input. </p>
             </form> 
