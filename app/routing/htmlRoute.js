@@ -25,6 +25,16 @@ module.exports = function(app) {
 
     });
 
+    app.get("/search", function(req, res) {
+        res.sendFile(path.join(__dirname, "../view/kanjiSearch.html"));
+        // if(req.session.loggedin === true){
+        //     res.sendFile(path.join(__dirname, "../view/home.html"));
+        // }else{
+        //     res.sendFile(path.join(__dirname, "../view/login.html"));
+        // }
+
+    });
+
     // login route 
     app.get("/login", function(req, res) {
         //console.log(req.session.loggedin)

@@ -7,7 +7,7 @@
     <title>KanjiApp</title>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="./assets/kanjiSearch"></script>
+<script type="text/javascript" src="./assets/kanjiSearch.js"></script>
 <script type="text/javascript" src="./assets/logoutjs.js"></script>
 <link rel="stylesheet" href="./assets/styles.css">
 </head>
@@ -22,7 +22,7 @@
             <form id="kanjiInput-Form">
                 <label> Search for Kanji </label>
                 <br>
-                <input id="kanjiInput" type="text"> Kanji </input>
+                <input id="kanjiInput" type="text"></input>
                 <input id ="submit-kanji-button" type="submit"></input>
                 <p id="error-text" style="display: none;" >There was no Kanji in the input. </p>
             </form> 
@@ -33,7 +33,6 @@
             <div class="RadioButton" id="SortKanjiRadio" style="display: none;">
                 Frequency <input type="radio" onclick="javascript:sortKanji();" name="sort" id="sortCountID"> 
                 JLPT <input type="radio" onclick="javascript:sortKanji();" name="sort" id="sortJLPTID">
-                <!--input id ="addKanjitoDB" type="submit" value="Add to DB"></input-->
             </div>
             <div class="KanjiOutput">
                 <ul id="Kanji-List"></ul>
