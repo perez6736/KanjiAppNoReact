@@ -1,9 +1,5 @@
 // lets make a call the server for some kanji characters 
-//人
-//一
-//見
-//言
-//気
+//人 一 見 言 気
 
 const intialKanjiToLoad = ["人", "一", "見", "言", "気"]
 // this send an array of kanji to the server. 
@@ -13,7 +9,6 @@ function sendKanjiArray(arr){
 		let KanjisInfo = data.kanjisInfo;
         console.log(KanjisInfo)
         createKanjiList(KanjisInfo)
-        addCommonVocabToDom(KanjisInfo);
 	})
 }
 
@@ -36,11 +31,11 @@ function createKanjiList(arrOfKanjiObjects){
 		//give the attr
 		divSingleKanjiContainer.attr('data-Kanji', arrOfKanjiObjects[i].literal[0]);
 		divSingleKanjiContainer.attr('data-JLPT', arrOfKanjiObjects[i].misc[0].jlpt[0])
-		divSingleKanjiContainer.addClass("Kanji-wrapper")
+		divSingleKanjiContainer.addClass("Kanji-wrapper row")
 		divKanjiInfo.addClass("Kanji-Info")
 		divKanji.addClass("Kanji");
-		divJLPT.addClass("JLPT-level");
-		divEN.addClass("Kanji-English");
+		divJLPT.addClass("JLPT-level row");
+		divEN.addClass("Kanji-English row ");
 		addtoDBbutton.attr('data-Kanji', arrOfKanjiObjects[i].literal[0]);
 		// set text 
 		divKanji.text(arrOfKanjiObjects[i].literal[0]);
@@ -59,8 +54,8 @@ function getCommonVocabWords(arrOfKanjiObjects){
     arrOfKanjiObjects.forEach(kanji => {
         let character = kanji.literal[0]
         console.log(character);
-        // for each of the 
+        
     });
 }
 
-sendKanjiArray(intialKanjiToLoad);
+// sendKanjiArray(intialKanjiToLoad);
