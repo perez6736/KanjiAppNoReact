@@ -72,7 +72,7 @@
 
 /* Stuff for kanji search page */ 
 
-#literalKanji {
+.literalKanji {
     font-size: 48pt;
     font-family: Yu Mincho;
 }

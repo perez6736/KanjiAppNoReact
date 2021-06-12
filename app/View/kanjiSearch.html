@@ -26,9 +26,9 @@
     <div class="Body container">
         <div class="row justify-content-around mt-5">
             <div class="input-group mb-3">
-                <input type="text" placeholder="Search here for Kanji" class="form-control">
+                <input id= "kanjiInput" type="text" placeholder="Search here for Kanji" class="form-control">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button">
+                  <button id="kanji-search" class="btn btn-outline-secondary" type="button">
                       <span class=" material-icons">search</span>
                   </button>
                 </div>
@@ -37,14 +37,16 @@
         
         <!--Dump the kanji definitions and stuff here-->
         <ul id="Kanji-List" class ="row mt-4" style="list-style-type: none;">
+
             <li data-kanji="人" data-jlpt="4" class="Kanji-wrapper row  justify-content-around mt-4">
                 <div class="col-auto" >
                   <div class="row" style="background: bisque;">
                     <div class="col-12">
-                        <div id= "literalKanji" >人</div>
+                        <div class= "literalKanji" >人</div>
                     </div>
                   </div>
                 </div>
+
                 <div class="col-9 rounded border p-2">
                     <div class="Kanji-English row m-1">Meaning: person</div>
                     <div class="JLPT-level row m-1">JLPT N4</div>
@@ -59,33 +61,12 @@
                     </div>
                 </div>
             </li>
+
             <li data-kanji="人" data-jlpt="4" class="Kanji-wrapper row  justify-content-around mt-4">
                 <div class="col-auto" >
                   <div class="row" style="background: bisque;">
                     <div class="col-12">
-                        <div id= "literalKanji" >人</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-9 rounded border p-2">
-                    <div class="Kanji-English row m-1">Meaning: person</div>
-                    <div class="JLPT-level row m-1">JLPT N4</div>
-                    <div class="commonWordText row m-1">Most Common Words</div>
-                    <div class="commonVocabWrapper row m-1">
-                        <div class="commonVocab col-4 m-1">人</div>
-                        <div class="commonVocab col-4 m-1">人間</div>
-                        <div class="commonVocab col-4 m-1">夫人</div>
-                        <div class="commonVocab col-4 m-1">人々</div>
-                        <div class="commonVocab col-4 m-1">犯人</div>
-                        <div class="commonVocab col-4 m-1">主人</div>
-                    </div>
-                </div>
-            </li>
-            <li data-kanji="人" data-jlpt="4" class="Kanji-wrapper row  justify-content-around mt-4">
-                <div class="col-auto" >
-                  <div class="row" style="background: bisque;">
-                    <div class="col-12">
-                        <div id= "literalKanji" >人</div>
+                        <div class= "literalKanji" >人</div>
                     </div>
                   </div>
                 </div>
