@@ -37,7 +37,7 @@ function createKanjiList(arrOfKanjiObjects){
 		childCol.append(literalkanjiDiv)
 
 		//kanji infor part. 
-		let kanjiInfoParentDiv = $("<div class='col-9 rounded border p-2'>");
+		let kanjiInfoParentDiv = $("<div class='col-9 rounded border p-2' style= 'background: #F0F8FF;'>");
 		let meaningDiv = $("<div class='Kanji-English row m-1'>");
 		meaningDiv.text(`Meaning: ${kanjiMeaning}`)
 		let JLPTDiv = $("<div class='JLPT-level row m-1'>");
