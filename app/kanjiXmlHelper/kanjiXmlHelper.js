@@ -162,4 +162,25 @@ character[{
   query_code: [ { q_code: [Array] } ],
   reading_meaning: [ { rmgroup: [Array], nanori: [Array] } ]
 }]
+
+
+what it should look like. 
+character[{
+  literal: 亜,
+  codepoint: [ { cp_value: [Array] } ],
+  radical: [ { rad_value: [Array] } ],
+  misc: [
+    {
+      grade: 1,
+      stroke_count: 7,
+      variant: [Array],
+      freq: 145,
+      jlpt: 1
+    }
+  ],
+  meaning: { english: [Array], spanish: [Array] }
+  dic_number: [ { dic_ref: [Array] } ],
+  query_code: [ { q_code: [Array] } ],
+  reading_meaning: [ { rmgroup: [Array], nanori: [Array] } ]
+}]
 */
