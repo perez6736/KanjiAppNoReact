@@ -142,6 +142,7 @@ kanjiXml.getKanjiFromMeaning("castle")
 module.exports = kanjiXml;
 
 /*
+TODO- this json is kinda ugly. I want to reformat this to make cleaner json to give to front end or api. 
 example of what a json element looks like. 
 
 character[{
